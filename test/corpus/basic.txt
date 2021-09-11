@@ -224,4 +224,5 @@ invariant gl_Position;
 
 (translation_unit
   (declaration
-    (identifier)))
+    (type_identifier)
+    (MISSING identifier)))

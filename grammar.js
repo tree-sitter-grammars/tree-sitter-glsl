@@ -24,7 +24,7 @@ module.exports = grammar(C, {
         ),
 
         declaration: ($, original) =>
-            choice(seq("invariant", $.identifier, ";"), seq(
+            choice(seq(choice("invariant", "precise"), $.identifier, ";"), seq(
                 repeat(
                     choice(
                         'in',
@@ -50,6 +50,7 @@ module.exports = grammar(C, {
                         'flat',
                         'noperspective',
                         'invariant',
+                        'precise',
                         $.extension_storage_class,
                         $.layout_specification,
                     )
