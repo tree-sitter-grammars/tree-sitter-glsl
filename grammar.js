@@ -21,6 +21,10 @@ module.exports = grammar(C, {
                         'coherent',
                         'readonly',
                         'writeonly',
+                        'precision',
+                        'highp',
+                        'mediump',
+                        "lowp",
                         $.layout_specification,
                     )
                 ), choice(seq($.identifier, $.field_declaration_list, optional($.identifier), ";"), original)
