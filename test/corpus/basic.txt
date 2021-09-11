@@ -213,3 +213,15 @@ uniform T2 {
       (field_declaration
         (type_identifier)
         (field_identifier)))))
+
+================================================================================
+Invariant qualifier
+================================================================================
+
+invariant gl_Position;
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (declaration
+    (identifier)))

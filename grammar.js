@@ -4,7 +4,8 @@ module.exports = grammar(C, {
     name: 'glsl',
 
     conflicts: ($, original) => original.concat([
-        [$.function_definition, $.declaration]
+        [$.function_definition, $.declaration],
+        [$.declaration]
     ]),
 
     rules: {
@@ -23,7 +24,7 @@ module.exports = grammar(C, {
         ),
 
         declaration: ($, original) =>
-            seq(
+            choice(seq("invariant", $.identifier, ";"), seq(
                 repeat(
                     choice(
                         'in',
@@ -48,11 +49,12 @@ module.exports = grammar(C, {
                         'smooth',
                         'flat',
                         'noperspective',
+                        'invariant',
                         $.extension_storage_class,
                         $.layout_specification,
                     )
                 ), choice(seq($.identifier, $.field_declaration_list, optional($.identifier), ";"), original)
-            ),
+            )),
 
         parameter_declaration: ($, original) =>
             seq(

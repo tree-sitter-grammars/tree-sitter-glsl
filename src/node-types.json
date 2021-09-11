@@ -3474,6 +3474,10 @@
     "named": false
   },
   {
+    "type": "invariant",
+    "named": false
+  },
+  {
     "type": "layout",
     "named": false
   },
