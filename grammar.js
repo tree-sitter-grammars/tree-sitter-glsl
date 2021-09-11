@@ -85,6 +85,6 @@ module.exports = grammar(C, {
 
         layout_specification: ($) => seq("layout", $.layout_qualifiers),
         layout_qualifiers: ($) => seq("(", $.qualifier, repeat(seq(",", $.qualifier)), ")"),
-        qualifier: ($) => choice("push_constant", "shared", "packed", $.identifier, seq($.identifier, "=", $._expression)),
+        qualifier: ($) => choice("shared", $.identifier, seq($.identifier, "=", $._expression)),
     }
 });

@@ -3510,10 +3510,6 @@
     "named": false
   },
   {
-    "type": "packed",
-    "named": false
-  },
-  {
     "type": "patch",
     "named": false
   },
