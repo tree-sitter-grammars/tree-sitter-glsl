@@ -3526,6 +3526,10 @@
     "named": false
   },
   {
+    "type": "precise",
+    "named": false
+  },
+  {
     "type": "precision",
     "named": false
   },
