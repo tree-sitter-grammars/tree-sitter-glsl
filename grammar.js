@@ -42,6 +42,9 @@ module.exports = grammar(C, {
                         'mediump',
                         'lowp',
                         'subroutine',
+                        'centroid',
+                        'sample',
+                        'patch',
                         $.extension_storage_class,
                         $.layout_specification,
                     )
@@ -63,6 +66,9 @@ module.exports = grammar(C, {
                         'coherent',
                         'readonly',
                         'writeonly',
+                        'centroid',
+                        'sample',
+                        'patch',
                         $.layout_specification,
                     )
                 ), original
@@ -79,6 +85,6 @@ module.exports = grammar(C, {
 
         layout_specification: ($) => seq("layout", $.layout_qualifiers),
         layout_qualifiers: ($) => seq("(", $.qualifier, repeat(seq(",", $.qualifier)), ")"),
-        qualifier: ($) => choice("push_constant", seq($.identifier, "=", $._expression)),
+        qualifier: ($) => choice("push_constant", "shared", $.identifier, seq($.identifier, "=", $._expression)),
     }
 });

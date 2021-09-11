@@ -1811,6 +1811,18 @@
                 "value": "subroutine"
               },
               {
+                "type": "STRING",
+                "value": "centroid"
+              },
+              {
+                "type": "STRING",
+                "value": "sample"
+              },
+              {
+                "type": "STRING",
+                "value": "patch"
+              },
+              {
                 "type": "SYMBOL",
                 "name": "extension_storage_class"
               },
@@ -3812,6 +3824,18 @@
               {
                 "type": "STRING",
                 "value": "writeonly"
+              },
+              {
+                "type": "STRING",
+                "value": "centroid"
+              },
+              {
+                "type": "STRING",
+                "value": "sample"
+              },
+              {
+                "type": "STRING",
+                "value": "patch"
               },
               {
                 "type": "SYMBOL",
@@ -6663,6 +6687,14 @@
         {
           "type": "STRING",
           "value": "push_constant"
+        },
+        {
+          "type": "STRING",
+          "value": "shared"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
         },
         {
           "type": "SEQ",

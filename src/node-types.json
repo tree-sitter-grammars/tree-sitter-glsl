@@ -3378,6 +3378,10 @@
     "named": false
   },
   {
+    "type": "centroid",
+    "named": false
+  },
+  {
     "type": "coherent",
     "named": false
   },
@@ -3506,6 +3510,10 @@
     "named": false
   },
   {
+    "type": "patch",
+    "named": false
+  },
+  {
     "type": "precision",
     "named": false
   },
@@ -3547,6 +3555,10 @@
   },
   {
     "type": "return",
+    "named": false
+  },
+  {
+    "type": "sample",
     "named": false
   },
   {
