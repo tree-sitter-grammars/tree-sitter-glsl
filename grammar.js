@@ -14,6 +14,9 @@ module.exports = grammar(C, {
                         'out',
                         'inout',
                         'uniform',
+                        'shared',
+                        'attribute',
+                        'varying',
                         $.layout_specification,
                     )
                 ), choice(seq($.identifier, $.field_declaration_list, optional($.identifier), ";"), original)
@@ -27,6 +30,9 @@ module.exports = grammar(C, {
                         'out',
                         'inout',
                         'uniform',
+                        'shared',
+                        'attribute',
+                        'varying',
                         $.layout_specification,
                     )
                 ), original
