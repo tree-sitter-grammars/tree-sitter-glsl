@@ -1052,6 +1052,10 @@
           "named": true
         },
         {
+          "type": "extension_storage_class",
+          "named": true
+        },
+        {
           "type": "field_declaration_list",
           "named": true
         },
@@ -1248,6 +1252,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "extension_storage_class",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "field_declaration",
@@ -3357,6 +3366,14 @@
     "named": false
   },
   {
+    "type": "callableDataEXT",
+    "named": false
+  },
+  {
+    "type": "callableDataInEXT",
+    "named": false
+  },
+  {
     "type": "case",
     "named": false
   },
@@ -3422,6 +3439,10 @@
   },
   {
     "type": "highp",
+    "named": false
+  },
+  {
+    "type": "hitAttributeEXT",
     "named": false
   },
   {
@@ -3505,6 +3526,14 @@
     "named": false
   },
   {
+    "type": "rayPayloadEXT",
+    "named": false
+  },
+  {
+    "type": "rayPayloadInEXT",
+    "named": false
+  },
+  {
     "type": "readonly",
     "named": false
   },
@@ -3518,6 +3547,10 @@
   },
   {
     "type": "return",
+    "named": false
+  },
+  {
+    "type": "shaderRecordEXT",
     "named": false
   },
   {

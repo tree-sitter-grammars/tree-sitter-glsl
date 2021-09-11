@@ -170,3 +170,27 @@ subroutine (colorRedBlue, colorRed ) vec4 redColor() {
             (number_literal)
             (number_literal)
             (number_literal)))))))
+
+================================================================================
+Extension attributes
+================================================================================
+
+layout(location = 0) rayPayloadInEXT PtPayload prd;
+hitAttributeEXT vec2 bary;
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (declaration
+    (layout_specification
+      (layout_qualifiers
+        (qualifier
+          (identifier)
+          (number_literal))))
+    (extension_storage_class)
+    (type_identifier)
+    (identifier))
+  (declaration
+    (extension_storage_class)
+    (type_identifier)
+    (identifier)))

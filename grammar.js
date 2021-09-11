@@ -42,6 +42,7 @@ module.exports = grammar(C, {
                         'mediump',
                         'lowp',
                         'subroutine',
+                        $.extension_storage_class,
                         $.layout_specification,
                     )
                 ), choice(seq($.identifier, $.field_declaration_list, optional($.identifier), ";"), original)
@@ -66,6 +67,15 @@ module.exports = grammar(C, {
                     )
                 ), original
             ),
+
+        extension_storage_class: _ => choice(
+            'rayPayloadEXT',
+            'rayPayloadInEXT',
+            'hitAttributeEXT',
+            'callableDataEXT',
+            'callableDataInEXT',
+            'shaderRecordEXT',
+        ),
 
         layout_specification: ($) => seq("layout", $.layout_qualifiers),
         layout_qualifiers: ($) => seq("(", $.qualifier, repeat(seq(",", $.qualifier)), ")"),

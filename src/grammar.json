@@ -1812,6 +1812,10 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "extension_storage_class"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "layout_specification"
               }
             ]
@@ -6577,6 +6581,35 @@
           }
         ]
       }
+    },
+    "extension_storage_class": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "rayPayloadEXT"
+        },
+        {
+          "type": "STRING",
+          "value": "rayPayloadInEXT"
+        },
+        {
+          "type": "STRING",
+          "value": "hitAttributeEXT"
+        },
+        {
+          "type": "STRING",
+          "value": "callableDataEXT"
+        },
+        {
+          "type": "STRING",
+          "value": "callableDataInEXT"
+        },
+        {
+          "type": "STRING",
+          "value": "shaderRecordEXT"
+        }
+      ]
     },
     "layout_specification": {
       "type": "SEQ",
