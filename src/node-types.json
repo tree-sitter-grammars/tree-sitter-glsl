@@ -3434,6 +3434,10 @@
     "named": true
   },
   {
+    "type": "flat",
+    "named": false
+  },
+  {
     "type": "for",
     "named": false
   },
@@ -3496,6 +3500,10 @@
   {
     "type": "ms_unsigned_ptr_modifier",
     "named": true
+  },
+  {
+    "type": "noperspective",
+    "named": false
   },
   {
     "type": "null",
@@ -3575,6 +3583,10 @@
   },
   {
     "type": "sizeof",
+    "named": false
+  },
+  {
+    "type": "smooth",
     "named": false
   },
   {

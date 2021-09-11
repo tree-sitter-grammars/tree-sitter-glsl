@@ -45,6 +45,9 @@ module.exports = grammar(C, {
                         'centroid',
                         'sample',
                         'patch',
+                        'smooth',
+                        'flat',
+                        'noperspective',
                         $.extension_storage_class,
                         $.layout_specification,
                     )
@@ -69,6 +72,9 @@ module.exports = grammar(C, {
                         'centroid',
                         'sample',
                         'patch',
+                        'smooth',
+                        'flat',
+                        'noperspective',
                         $.layout_specification,
                     )
                 ), original

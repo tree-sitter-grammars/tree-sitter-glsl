@@ -1823,6 +1823,18 @@
                 "value": "patch"
               },
               {
+                "type": "STRING",
+                "value": "smooth"
+              },
+              {
+                "type": "STRING",
+                "value": "flat"
+              },
+              {
+                "type": "STRING",
+                "value": "noperspective"
+              },
+              {
                 "type": "SYMBOL",
                 "name": "extension_storage_class"
               },
@@ -3836,6 +3848,18 @@
               {
                 "type": "STRING",
                 "value": "patch"
+              },
+              {
+                "type": "STRING",
+                "value": "smooth"
+              },
+              {
+                "type": "STRING",
+                "value": "flat"
+              },
+              {
+                "type": "STRING",
+                "value": "noperspective"
               },
               {
                 "type": "SYMBOL",
