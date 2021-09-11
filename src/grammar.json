@@ -6693,6 +6693,10 @@
           "value": "shared"
         },
         {
+          "type": "STRING",
+          "value": "packed"
+        },
+        {
           "type": "SYMBOL",
           "name": "identifier"
         },
