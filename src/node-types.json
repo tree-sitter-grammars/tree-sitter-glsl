@@ -3337,6 +3337,10 @@
     "named": false
   },
   {
+    "type": "attribute",
+    "named": false
+  },
+  {
     "type": "auto",
     "named": false
   },
@@ -3345,7 +3349,15 @@
     "named": false
   },
   {
+    "type": "buffer",
+    "named": false
+  },
+  {
     "type": "case",
+    "named": false
+  },
+  {
+    "type": "coherent",
     "named": false
   },
   {
@@ -3473,6 +3485,10 @@
     "named": false
   },
   {
+    "type": "readonly",
+    "named": false
+  },
+  {
     "type": "register",
     "named": false
   },
@@ -3482,6 +3498,10 @@
   },
   {
     "type": "return",
+    "named": false
+  },
+  {
+    "type": "shared",
     "named": false
   },
   {
@@ -3557,11 +3577,19 @@
     "named": false
   },
   {
+    "type": "varying",
+    "named": false
+  },
+  {
     "type": "volatile",
     "named": false
   },
   {
     "type": "while",
+    "named": false
+  },
+  {
+    "type": "writeonly",
     "named": false
   },
   {
