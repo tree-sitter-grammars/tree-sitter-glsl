@@ -78,6 +78,7 @@ module.exports = grammar(C, {
                         'smooth',
                         'flat',
                         'noperspective',
+                        'precise',
                         $.layout_specification,
                     )
                 ), original

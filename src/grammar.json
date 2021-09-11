@@ -3901,6 +3901,10 @@
                 "value": "noperspective"
               },
               {
+                "type": "STRING",
+                "value": "precise"
+              },
+              {
                 "type": "SYMBOL",
                 "name": "layout_specification"
               }
