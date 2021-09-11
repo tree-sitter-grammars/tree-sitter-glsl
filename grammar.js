@@ -18,9 +18,9 @@ module.exports = grammar(C, {
                         'attribute',
                         'varying',
                         'buffer',
-'coherent',
-'readonly',
-'writeonly',
+                        'coherent',
+                        'readonly',
+                        'writeonly',
                         $.layout_specification,
                     )
                 ), choice(seq($.identifier, $.field_declaration_list, optional($.identifier), ";"), original)
@@ -38,9 +38,9 @@ module.exports = grammar(C, {
                         'attribute',
                         'varying',
                         'buffer',
-'coherent',
-'readonly',
-'writeonly',
+                        'coherent',
+                        'readonly',
+                        'writeonly',
                         $.layout_specification,
                     )
                 ), original
