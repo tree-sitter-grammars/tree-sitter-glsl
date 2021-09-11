@@ -3,8 +3,24 @@ const C = require("tree-sitter-c/grammar")
 module.exports = grammar(C, {
     name: 'glsl',
 
+    conflicts: ($, original) => original.concat([
+        [$.function_definition, $.declaration]
+    ]),
+
     rules: {
         _top_level_item: (_, original) => original,
+
+        function_definition: ($, original) => seq(
+            optional(
+                seq(
+                    'subroutine',
+                    optional(
+                        seq('(', optional($.identifier), repeat(seq(',', $.identifier)), ')')
+                    ),
+                )
+            )
+            , original
+        ),
 
         declaration: ($, original) =>
             seq(
@@ -24,7 +40,8 @@ module.exports = grammar(C, {
                         'precision',
                         'highp',
                         'mediump',
-                        "lowp",
+                        'lowp',
+                        'subroutine',
                         $.layout_specification,
                     )
                 ), choice(seq($.identifier, $.field_declaration_list, optional($.identifier), ";"), original)

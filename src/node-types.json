@@ -1537,6 +1537,10 @@
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "ms_call_modifier",
           "named": true
         },
@@ -3542,6 +3546,10 @@
   },
   {
     "type": "struct",
+    "named": false
+  },
+  {
+    "type": "subroutine",
     "named": false
   },
   {
