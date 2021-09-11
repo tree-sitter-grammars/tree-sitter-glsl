@@ -3530,10 +3530,6 @@
     "named": true
   },
   {
-    "type": "push_constant",
-    "named": false
-  },
-  {
     "type": "rayPayloadEXT",
     "named": false
   },

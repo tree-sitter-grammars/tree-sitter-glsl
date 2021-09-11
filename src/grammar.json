@@ -6686,10 +6686,6 @@
       "members": [
         {
           "type": "STRING",
-          "value": "push_constant"
-        },
-        {
-          "type": "STRING",
           "value": "shared"
         },
         {

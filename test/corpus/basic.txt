@@ -117,7 +117,8 @@ float member2;
   (declaration
     (layout_specification
       (layout_qualifiers
-        (qualifier)))
+        (qualifier
+          (identifier))))
     (identifier)
     (field_declaration_list
       (field_declaration
@@ -194,3 +195,21 @@ hitAttributeEXT vec2 bary;
     (extension_storage_class)
     (type_identifier)
     (identifier)))
+
+================================================================================
+Uniform block
+================================================================================
+
+uniform T2 {
+  mat3 foo;
+};
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (declaration
+    (identifier)
+    (field_declaration_list
+      (field_declaration
+        (type_identifier)
+        (field_identifier)))))
