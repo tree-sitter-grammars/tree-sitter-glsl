@@ -1,0 +1,37 @@
+name: Update Dependencies
+on:
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
+  push:
+    branches: ["master"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - name: Update C parser
+        run: npm update
+      - name: Install dependencies
+        run: npm ci
+      - name: Generate parser
+        run: npm install
+      - name: Run tests
+        run: npm test
+
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub"
+          git config user.email "noreply@github.com"
+          git commit -am "Update dependencies and regenerate parser" || echo 'No commit necessary!'
+          git clean -xf
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Update dependencies
+          title: Update dependencies
+          branch: update-dependencies-pr
+          base: ${{ github.head_ref }}

@@ -1,0 +1,130 @@
+================================================================================
+Simple fragment
+================================================================================
+
+#version 150
+ 
+out vec4 colorOut;
+ 
+void main()
+{
+    colorOut = vec4(1.0, 0.0, 0.0, 1.0);
+}
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (preproc_call
+    directive: (preproc_directive)
+    argument: (preproc_arg))
+  (declaration
+    type: (type_identifier)
+    declarator: (identifier))
+  (function_definition
+    type: (primitive_type)
+    declarator: (function_declarator
+      declarator: (identifier)
+      parameters: (parameter_list))
+    body: (compound_statement
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (call_expression
+            function: (identifier)
+            arguments: (argument_list
+              (number_literal)
+              (number_literal)
+              (number_literal)
+              (number_literal))))))))
+
+================================================================================
+Locations
+================================================================================
+
+layout(location = 0) out vec3 foo;
+layout(location = 0, binding= 2) out vec3 bar;
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (declaration
+    (layout_specification
+      (layout_qualifiers
+        (qualifier
+          (identifier)
+          (number_literal))))
+    (type_identifier)
+    (identifier))
+  (declaration
+    (layout_specification
+      (layout_qualifiers
+        (qualifier
+          (identifier)
+          (number_literal))
+        (qualifier
+          (identifier)
+          (number_literal))))
+    (type_identifier)
+    (identifier)))
+
+================================================================================
+Uniforms
+================================================================================
+
+uniform vec3 foo;
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (declaration
+    (type_identifier)
+    (identifier)))
+
+================================================================================
+In/out parameters
+================================================================================
+
+bool HitTest(in rayQueryEXT rayQuery, in Ray r)
+{
+}
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (function_definition
+    (primitive_type)
+    (function_declarator
+      (identifier)
+      (parameter_list
+        (parameter_declaration
+          (type_identifier)
+          (identifier))
+        (parameter_declaration
+          (type_identifier)
+          (identifier))))
+    (compound_statement)))
+
+================================================================================
+push_constant
+================================================================================
+
+layout(push_constant) uniform BlockName {
+int member1;
+float member2;
+} InstanceName; // optional instance name
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (declaration
+    (layout_specification
+      (layout_qualifiers
+        (qualifier)))
+    (identifier)
+    (field_declaration_list
+      (field_declaration
+        (primitive_type)
+        (field_identifier))
+      (field_declaration
+        (primitive_type)
+        (field_identifier)))
+    (identifier))
+  (comment))
