@@ -1720,6 +1720,22 @@
                 "value": "writeonly"
               },
               {
+                "type": "STRING",
+                "value": "precision"
+              },
+              {
+                "type": "STRING",
+                "value": "highp"
+              },
+              {
+                "type": "STRING",
+                "value": "mediump"
+              },
+              {
+                "type": "STRING",
+                "value": "lowp"
+              },
+              {
                 "type": "SYMBOL",
                 "name": "layout_specification"
               }

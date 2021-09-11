@@ -3417,6 +3417,10 @@
     "named": false
   },
   {
+    "type": "highp",
+    "named": false
+  },
+  {
     "type": "identifier",
     "named": true
   },
@@ -3445,6 +3449,14 @@
     "named": false
   },
   {
+    "type": "lowp",
+    "named": false
+  },
+  {
+    "type": "mediump",
+    "named": false
+  },
+  {
     "type": "ms_restrict_modifier",
     "named": true
   },
@@ -3466,6 +3478,10 @@
   },
   {
     "type": "out",
+    "named": false
+  },
+  {
+    "type": "precision",
     "named": false
   },
   {
