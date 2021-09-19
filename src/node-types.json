@@ -853,6 +853,10 @@
       "required": false,
       "types": [
         {
+          "type": "attributed_statement",
+          "named": true
+        },
+        {
           "type": "break_statement",
           "named": true
         },
@@ -2090,6 +2094,10 @@
         {
           "type": "parameter_declaration",
           "named": true
+        },
+        {
+          "type": "variadic_parameter",
+          "named": true
         }
       ]
     }
@@ -3207,6 +3215,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "variadic_parameter",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "while_statement",
