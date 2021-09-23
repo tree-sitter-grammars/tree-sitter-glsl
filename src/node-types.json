@@ -1425,6 +1425,14 @@
           "named": true
         },
         {
+          "type": "extension_storage_class",
+          "named": true
+        },
+        {
+          "type": "layout_specification",
+          "named": true
+        },
+        {
           "type": "ms_declspec_modifier",
           "named": true
         },

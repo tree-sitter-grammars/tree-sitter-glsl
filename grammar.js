@@ -57,6 +57,37 @@ module.exports = grammar(C, {
                 ), choice(seq($.identifier, $.field_declaration_list, optional($.identifier), ";"), original)
             )),
 
+        field_declaration: ($, original) =>
+            seq(
+                repeat(choice(
+                    'in',
+                    'out',
+                    'inout',
+                    'uniform',
+                    'shared',
+                    'attribute',
+                    'varying',
+                    'buffer',
+                    'coherent',
+                    'readonly',
+                    'writeonly',
+                    'precision',
+                    'highp',
+                    'mediump',
+                    'lowp',
+                    'subroutine',
+                    'centroid',
+                    'sample',
+                    'patch',
+                    'smooth',
+                    'flat',
+                    'noperspective',
+                    'invariant',
+                    'precise',
+                    $.extension_storage_class,
+                    $.layout_specification,
+                )), original),
+
         parameter_declaration: ($, original) =>
             seq(
                 repeat(

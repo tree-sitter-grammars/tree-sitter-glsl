@@ -225,3 +225,21 @@ invariant gl_Position;
 (translation_unit
   (declaration
     (identifier)))
+
+================================================================================
+Field modifier
+================================================================================
+
+struct Foo {
+  flat int i;
+};
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (struct_specifier
+    (type_identifier)
+    (field_declaration_list
+      (field_declaration
+        (primitive_type)
+        (field_identifier)))))
