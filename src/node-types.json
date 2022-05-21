@@ -3560,6 +3560,14 @@
     "named": false
   },
   {
+    "type": "callableDataInNV",
+    "named": false
+  },
+  {
+    "type": "callableDataNV",
+    "named": false
+  },
+  {
     "type": "case",
     "named": false
   },
@@ -3637,6 +3645,10 @@
   },
   {
     "type": "hitAttributeEXT",
+    "named": false
+  },
+  {
+    "type": "hitAttributeNV",
     "named": false
   },
   {
@@ -3740,6 +3752,14 @@
     "named": false
   },
   {
+    "type": "rayPayloadInNV",
+    "named": false
+  },
+  {
+    "type": "rayPayloadNV",
+    "named": false
+  },
+  {
     "type": "readonly",
     "named": false
   },
@@ -3761,6 +3781,10 @@
   },
   {
     "type": "shaderRecordEXT",
+    "named": false
+  },
+  {
+    "type": "shaderRecordNV",
     "named": false
   },
   {

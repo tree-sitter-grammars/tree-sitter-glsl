@@ -122,6 +122,12 @@ module.exports = grammar(C, {
             'callableDataEXT',
             'callableDataInEXT',
             'shaderRecordEXT',
+            'rayPayloadNV',
+            'rayPayloadInNV',
+            'hitAttributeNV',
+            'callableDataNV',
+            'callableDataInNV',
+            'shaderRecordNV',
         ),
 
         layout_specification: ($) => seq("layout", $.layout_qualifiers),

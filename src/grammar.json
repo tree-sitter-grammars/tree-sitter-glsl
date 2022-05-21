@@ -7031,6 +7031,30 @@
         {
           "type": "STRING",
           "value": "shaderRecordEXT"
+        },
+        {
+          "type": "STRING",
+          "value": "rayPayloadNV"
+        },
+        {
+          "type": "STRING",
+          "value": "rayPayloadInNV"
+        },
+        {
+          "type": "STRING",
+          "value": "hitAttributeNV"
+        },
+        {
+          "type": "STRING",
+          "value": "callableDataNV"
+        },
+        {
+          "type": "STRING",
+          "value": "callableDataInNV"
+        },
+        {
+          "type": "STRING",
+          "value": "shaderRecordNV"
         }
       ]
     },
