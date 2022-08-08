@@ -30,6 +30,8 @@
       "file-types": [
         "vert",
         "frag",
+        "vsh",
+        "fsh",
         "glsl"
       ]
     }
