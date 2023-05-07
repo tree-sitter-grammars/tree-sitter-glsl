@@ -106,11 +106,11 @@
   "noperspective"
   "invariant"
   "precise"
-] @keyword
+] @type.qualifier
 
 "subroutine" @keyword.function
 
-(extension_storage_class) @attribute
+(extension_storage_class) @storageclass
 
 (
   (identifier) @variable.builtin
