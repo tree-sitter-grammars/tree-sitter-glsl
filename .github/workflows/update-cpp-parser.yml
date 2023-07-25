@@ -12,7 +12,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
-      - name: Update C parser
+      - name: Update scanner
+        run: |
+          curl https://raw.githubusercontent.com/tree-sitter/tree-sitter-cpp/master/src/scanner.c -o src/scanner.c
+          sed -i 's/tree_sitter_cpp/tree_sitter_glsl/g' src/scanner.c
+          git diff
+      - name: Update CPP parser
         run: npm update
       - name: Install dependencies
         run: npm ci
