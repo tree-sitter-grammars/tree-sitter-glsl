@@ -9,7 +9,13 @@ module.exports = grammar(C, {
     ]),
 
     rules: {
-        _top_level_item: (_, original) => original,
+        _top_level_item: (_, original) => choice(
+            ...original.members.filter((member) => member.content?.name != '_old_style_function_definition'),
+        ),
+
+        _block_item: (_, original) => choice(
+            ...original.members.filter((member) => member.content?.name != '_old_style_function_definition'),
+        ),
 
         function_definition: ($, original) => seq(
             optional(
