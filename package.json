@@ -1,7 +1,7 @@
 {
   "name": "tree-sitter-glsl",
   "version": "0.1.4",
-  "description": "GLSL grammar for tree-sitter (based on tree-sitter-c",
+  "description": "GLSL grammar for tree-sitter (based on tree-sitter-c)",
   "main": "bindings/node",
   "keywords": [
     "parser",
