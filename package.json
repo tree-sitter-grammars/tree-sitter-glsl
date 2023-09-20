@@ -28,7 +28,7 @@
   },
   "tree-sitter": [
     {
-      "scope": "source.cpp",
+      "scope": "source.glsl",
       "file-types": [
         "vert",
         "frag",
