@@ -281,3 +281,27 @@ layout (input_attachment_index = 1, set = 1, binding = 1) uniform subpassInput i
           (number_literal))))
     (type_identifier)
     (identifier)))
+
+================================================================================
+Discard
+================================================================================
+void main() {
+  if (true) return;
+  if (true) discard;
+}
+--------------------------------------------------------------------------------
+(translation_unit
+  (function_definition
+    (primitive_type)
+    (function_declarator
+      (identifier)
+      (parameter_list))
+    (compound_statement
+      (if_statement
+        (parenthesized_expression
+          (true))
+        (return_statement))
+      (if_statement
+        (parenthesized_expression
+          (true))
+        (discard_statement)))))

@@ -17,6 +17,20 @@ module.exports = grammar(C, {
             ...original.members.filter((member) => member.content?.name != '_old_style_function_definition'),
         ),
 
+        _top_level_statement: (_, original) => choice(
+            ...original.members.concat({
+                type: "SYMBOL",
+                name: "discard_statement",
+            })
+        ),
+
+        _non_case_statement: (_, original) => choice(
+            ...original.members.concat({
+                type: "SYMBOL",
+                name: "discard_statement",
+            })
+        ),
+
         function_definition: ($, original) => seq(
             optional(
                 seq(
@@ -27,6 +41,11 @@ module.exports = grammar(C, {
                 )
             )
             , original
+        ),
+
+        discard_statement: () => seq(
+            "discard",
+            ";"
         ),
 
         declaration: ($, original) =>

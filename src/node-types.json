@@ -212,6 +212,10 @@
         "named": true
       },
       {
+        "type": "discard_statement",
+        "named": true
+      },
+      {
         "type": "do_statement",
         "named": true
       },
@@ -917,6 +921,10 @@
           "named": true
         },
         {
+          "type": "discard_statement",
+          "named": true
+        },
+        {
           "type": "do_statement",
           "named": true
         },
@@ -1313,6 +1321,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "discard_statement",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "do_statement",
@@ -3449,6 +3462,10 @@
           "named": true
         },
         {
+          "type": "discard_statement",
+          "named": true
+        },
+        {
           "type": "do_statement",
           "named": true
         },
@@ -4169,6 +4186,10 @@
   },
   {
     "type": "defined",
+    "named": false
+  },
+  {
+    "type": "discard",
     "named": false
   },
   {

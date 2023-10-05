@@ -4984,6 +4984,10 @@
         {
           "type": "SYMBOL",
           "name": "goto_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "discard_statement"
         }
       ]
     },
@@ -5050,6 +5054,10 @@
         {
           "type": "SYMBOL",
           "name": "goto_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "discard_statement"
         }
       ]
     },
@@ -8496,6 +8504,19 @@
           }
         ]
       }
+    },
+    "discard_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "discard"
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
     },
     "extension_storage_class": {
       "type": "CHOICE",
