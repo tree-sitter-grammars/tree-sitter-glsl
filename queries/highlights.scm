@@ -80,7 +80,6 @@
 
 (comment) @comment
 ; inherits: c
-
 [
   "in"
   "out"
@@ -110,7 +109,7 @@
 
 "subroutine" @keyword.function
 
-(extension_storage_class) @storageclass
+(extension_storage_class) @keyword.storage
 
 ((identifier) @variable.builtin
- (#lua-match? @variable.builtin "^gl_"))
+  (#lua-match? @variable.builtin "^gl_"))
