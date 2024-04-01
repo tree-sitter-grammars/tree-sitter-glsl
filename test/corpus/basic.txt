@@ -314,3 +314,31 @@ version and extensions
     (preproc_directive)
     (identifier)
     (extension_behavior)))
+
+================================================================================
+SSBOs Declaration
+================================================================================
+layout(binding = 1, set = 0, std430) buffer GBuffer { GBuffer g[]; } rgbuf[NFRAMES];
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (declaration
+    (layout_specification
+      (layout_qualifiers
+        (qualifier
+          (identifier)
+          (number_literal))
+        (qualifier
+          (identifier)
+          (number_literal))
+        (qualifier
+          (identifier))))
+    (identifier)
+    (field_declaration_list
+      (field_declaration
+        (type_identifier)
+        (array_declarator
+          (field_identifier))))
+    (array_declarator
+      (identifier)
+      (identifier))))
