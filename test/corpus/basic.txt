@@ -281,3 +281,36 @@ layout (input_attachment_index = 1, set = 1, binding = 1) uniform subpassInput i
           (number_literal))))
     (type_identifier)
     (identifier)))
+
+================================================================================
+version and extensions
+================================================================================
+
+#version 460
+#extension GL_EXT_ray_tracing: require
+#extension GL_GOOGLE_include_directive: enable
+#extension GL_EXT_ray_tracing: warn
+#extension GL_GOOGLE_include_directive: disable
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (preproc_call
+    (preproc_directive)
+    (preproc_arg))
+  (preproc_extension
+    (preproc_directive)
+    (identifier)
+    (extension_behavior))
+  (preproc_extension
+    (preproc_directive)
+    (identifier)
+    (extension_behavior))
+  (preproc_extension
+    (preproc_directive)
+    (identifier)
+    (extension_behavior))
+  (preproc_extension
+    (preproc_directive)
+    (identifier)
+    (extension_behavior)))
