@@ -1113,6 +1113,10 @@
           "named": true
         },
         {
+          "type": "preproc_extension",
+          "named": true
+        },
+        {
           "type": "preproc_function_def",
           "named": true
         },
@@ -1328,6 +1332,10 @@
           "named": true
         },
         {
+          "type": "preproc_extension",
+          "named": true
+        },
+        {
           "type": "preproc_function_def",
           "named": true
         },
@@ -1508,6 +1516,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "extension_behavior",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "extension_storage_class",
@@ -2813,6 +2826,10 @@
           "named": true
         },
         {
+          "type": "preproc_extension",
+          "named": true
+        },
+        {
           "type": "preproc_function_def",
           "named": true
         },
@@ -2905,6 +2922,10 @@
           "named": true
         },
         {
+          "type": "preproc_extension",
+          "named": true
+        },
+        {
           "type": "preproc_function_def",
           "named": true
         },
@@ -2972,6 +2993,10 @@
           "named": true
         },
         {
+          "type": "preproc_extension",
+          "named": true
+        },
+        {
           "type": "preproc_function_def",
           "named": true
         },
@@ -2992,6 +3017,42 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "preproc_extension",
+    "named": true,
+    "fields": {
+      "behavior": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "extension_behavior",
+            "named": true
+          }
+        ]
+      },
+      "directive": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "preproc_directive",
+            "named": true
+          }
+        ]
+      },
+      "extension": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -3128,6 +3189,10 @@
           "named": true
         },
         {
+          "type": "preproc_extension",
+          "named": true
+        },
+        {
           "type": "preproc_function_def",
           "named": true
         },
@@ -3221,6 +3286,10 @@
         },
         {
           "type": "preproc_def",
+          "named": true
+        },
+        {
+          "type": "preproc_extension",
           "named": true
         },
         {
@@ -3677,6 +3746,10 @@
         },
         {
           "type": "preproc_def",
+          "named": true
+        },
+        {
+          "type": "preproc_extension",
           "named": true
         },
         {
@@ -4379,11 +4452,19 @@
     "named": false
   },
   {
+    "type": "disable",
+    "named": false
+  },
+  {
     "type": "do",
     "named": false
   },
   {
     "type": "else",
+    "named": false
+  },
+  {
+    "type": "enable",
     "named": false
   },
   {
@@ -4555,6 +4636,10 @@
     "named": false
   },
   {
+    "type": "require",
+    "named": false
+  },
+  {
     "type": "restrict",
     "named": false
   },
@@ -4672,6 +4757,10 @@
   },
   {
     "type": "volatile",
+    "named": false
+  },
+  {
+    "type": "warn",
     "named": false
   },
   {

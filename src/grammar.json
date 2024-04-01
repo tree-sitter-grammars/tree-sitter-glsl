@@ -63,6 +63,10 @@
         {
           "type": "SYMBOL",
           "name": "preproc_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "preproc_extension"
         }
       ]
     },
@@ -120,6 +124,10 @@
         {
           "type": "SYMBOL",
           "name": "preproc_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "preproc_extension"
         }
       ]
     },
@@ -9777,6 +9785,70 @@
           }
         ]
       }
+    },
+    "preproc_extension": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "directive",
+          "content": {
+            "type": "SYMBOL",
+            "name": "preproc_directive"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "extension",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "[ \\t]*:[ \\t]*"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "behavior",
+          "content": {
+            "type": "SYMBOL",
+            "name": "extension_behavior"
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\r?\\n"
+          }
+        }
+      ]
+    },
+    "extension_behavior": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "require"
+        },
+        {
+          "type": "STRING",
+          "value": "enable"
+        },
+        {
+          "type": "STRING",
+          "value": "warn"
+        },
+        {
+          "type": "STRING",
+          "value": "disable"
+        }
+      ]
     },
     "extension_storage_class": {
       "type": "CHOICE",

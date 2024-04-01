@@ -9,12 +9,14 @@ module.exports = grammar(C, {
     ]),
 
     rules: {
-        _top_level_item: (_, original) => choice(
+        _top_level_item: ($, original) => choice(
             ...original.members.filter((member) => member.content?.name != '_old_style_function_definition'),
+            $.preproc_extension,
         ),
 
-        _block_item: (_, original) => choice(
+        _block_item: ($, original) => choice(
             ...original.members.filter((member) => member.content?.name != '_old_style_function_definition'),
+            $.preproc_extension,
         ),
 
         function_definition: ($, original) => seq(
@@ -28,6 +30,16 @@ module.exports = grammar(C, {
             )
             , original
         ),
+
+        preproc_extension: $ => seq(
+          field('directive', $.preproc_directive),
+          field('extension', $.identifier),
+          token.immediate(/[ \t]*:[ \t]*/),
+          field('behavior', $.extension_behavior),
+          token.immediate(/\r?\n/),
+        ),
+
+        extension_behavior: $ => choice("require", "enable", "warn", "disable"),
 
         declaration: ($, original) =>
             choice(seq(choice("invariant", "precise"), $.identifier, ";"), seq(
