@@ -72,7 +72,10 @@ module.exports = grammar(C, {
                         $.extension_storage_class,
                         $.layout_specification,
                     )
-                ), choice(seq($.identifier, $.field_declaration_list, optional($.identifier), ";"), original)
+                ), choice(
+                    seq($.identifier, $.field_declaration_list, optional(choice($.identifier, $.array_declarator)), ";"),
+                    original
+                )
             )),
 
         field_declaration: ($, original) =>
