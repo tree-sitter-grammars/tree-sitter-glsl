@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-glsl",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "GLSL grammar for tree-sitter (based on tree-sitter-c)",
   "main": "bindings/node",
   "types": "bindings/node",
