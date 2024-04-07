@@ -1,6 +1,8 @@
 name: Update
 
 on:
+  push:
+    branches: [master]
   schedule:
     - cron: "0 0 * * 0"
   workflow_dispatch:
@@ -20,6 +22,3 @@ jobs:
           cache: npm
           node-version: ${{vars.NODE_VERSION}}
       - uses: tree-sitter/parser-update-action@v1.1
-        with:
-          parent-name: c
-          language-name: glsl
