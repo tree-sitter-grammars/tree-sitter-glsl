@@ -5898,13 +5898,8 @@
       ]
     },
     "variadic_parameter": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "..."
-        }
-      ]
+      "type": "STRING",
+      "value": "..."
     },
     "parameter_list": {
       "type": "SEQ",
