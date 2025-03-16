@@ -7,7 +7,9 @@ let package = Package(
     products: [
         .library(name: "TreeSitterGlsl", targets: ["TreeSitterGlsl"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/ChimeHQ/SwiftTreeSitter", from: "0.8.0"),
+    ],
     targets: [
         .target(name: "TreeSitterGlsl",
                 path: ".",
@@ -42,7 +44,14 @@ let package = Package(
                     .copy("queries")
                 ],
                 publicHeadersPath: "bindings/swift",
-                cSettings: [.headerSearchPath("src")])
+                cSettings: [.headerSearchPath("src")]),
+         .testTarget(
+                name: "TreeSitterGlslTests",
+                dependencies: [
+                    "SwiftTreeSitter",
+                    "TreeSitterGlsl",
+                ],
+                path: "bindings/swift/TreeSitterGlslTests")
     ],
     cLanguageStandard: .c11
 )
