@@ -2,7 +2,7 @@
   "grammars": [
     {
       "name": "glsl",
-      "camelcase": "Glsl",
+      "camelcase": "GLSL",
       "scope": "source.glsl",
       "path": ".",
       "file-types": [
@@ -11,28 +11,21 @@
         "vsh",
         "fsh",
         "glsl"
-      ]
+      ],
+      "highlights": "queries/highlights.scm"
     }
   ],
   "metadata": {
     "version": "0.2.0",
     "license": "MIT",
-    "description": "GLSL grammar for tree-sitter (based on tree-sitter-c)",
+    "description": "GLSL grammar for tree-sitter",
     "authors": [
       {
         "name": "Stephan Seitz"
       }
     ],
     "links": {
-      "repository": "git://github.com/theHamsta/tree-sitter-glsl.git"
+      "repository": "https://github.com/tree-sitter-grammars/tree-sitter-glsl"
     }
-  },
-  "bindings": {
-    "c": true,
-    "go": true,
-    "node": true,
-    "python": true,
-    "rust": true,
-    "swift": true
   }
 }

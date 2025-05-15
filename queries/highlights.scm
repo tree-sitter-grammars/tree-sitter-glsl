@@ -1,3 +1,8 @@
+(identifier) @variable
+
+((identifier) @constant
+ (#match? @constant "^[A-Z][A-Z\\d_]*$"))
+
 "break" @keyword
 "case" @keyword
 "const" @keyword
@@ -57,6 +62,12 @@
 (number_literal) @number
 (char_literal) @number
 
+(field_identifier) @property
+(statement_identifier) @label
+(type_identifier) @type
+(primitive_type) @type
+(sized_type_specifier) @type
+
 (call_expression
   function: (identifier) @function)
 (call_expression
@@ -67,19 +78,10 @@
 (preproc_function_def
   name: (identifier) @function.special)
 
-(field_identifier) @property
-(statement_identifier) @label
-(type_identifier) @type
-(primitive_type) @type
-(sized_type_specifier) @type
-
-((identifier) @constant
- (#match? @constant "^[A-Z][A-Z\\d_]*$"))
-
-(identifier) @variable
-
 (comment) @comment
+
 ; inherits: c
+
 [
   "in"
   "out"
@@ -105,11 +107,11 @@
   "noperspective"
   "invariant"
   "precise"
-] @type.qualifier
+] @keyword.modifier
 
 "subroutine" @keyword.function
 
-(extension_storage_class) @keyword.storage
+(extension_storage_class) @keyword.modifier
 
 ((identifier) @variable.builtin
-  (#lua-match? @variable.builtin "^gl_"))
+  (#match? @variable.builtin "^gl_"))
