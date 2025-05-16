@@ -1,48 +1,51 @@
 {
   "name": "tree-sitter-glsl",
   "version": "0.2.0",
-  "description": "GLSL grammar for tree-sitter (based on tree-sitter-c)",
+  "description": "GLSL grammar for tree-sitter",
+  "repository": "https://github.com/tree-sitter-grammars/tree-sitter-glsl",
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Seitz"
+  },
   "main": "bindings/node",
   "types": "bindings/node",
   "keywords": [
-    "parser",
+    "incremental",
+    "parsing",
+    "tree-sitter",
     "glsl"
   ],
   "files": [
     "grammar.js",
+    "tree-sitter.json",
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
     "queries/*",
-    "src/**"
+    "src/**",
+    "*.wasm"
   ],
-  "author": "Stephan Seitz",
-  "license": "MIT",
   "dependencies": {
-    "node-addon-api": "^7.1.0",
-    "node-gyp-build": "^4.8.0"
+    "node-addon-api": "^8.3.1",
+    "node-gyp-build": "^4.8.4",
+    "tree-sitter-c": "^0.23.5"
+  },
+  "devDependencies": {
+    "prebuildify": "^6.0.1",
+    "tree-sitter-cli": "^0.25.4"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.22.1"
+    "tree-sitter": "^0.22.4"
   },
   "peerDependenciesMeta": {
-    "tree_sitter": {
+    "tree-sitter": {
       "optional": true
     }
   },
-  "devDependencies": {
-    "tree-sitter-c": "git://github.com/tree-sitter/tree-sitter-c.git",
-    "tree-sitter-cli": "^0.24.7",
-    "prebuildify": "^6.0.0"
-  },
   "scripts": {
-    "test": "tree-sitter test",
-    "test-windows": "tree-sitter test",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/theHamsta/tree-sitter-glsl.git"
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
   }
 }
