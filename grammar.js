@@ -5,10 +5,12 @@ module.exports = grammar(C, {
 
     conflicts: ($, original) => original.concat([
         [$.function_definition, $.declaration],
-        [$.declaration]
+        [$.declaration],
+        [$.cast_expression],
     ]),
 
     rules: {
+
         _top_level_item: ($, original) => choice(
             ...original.members.filter((member) => member.content?.name != '_old_style_function_definition'),
             $.preproc_extension,
@@ -30,6 +32,15 @@ module.exports = grammar(C, {
             )
             , original
         ),
+
+        cast_expression: $ => prec(C.PREC.CAST, seq(
+          field('type', choice(
+            $.primitive_type
+          )),
+          '(',
+          field('value', $.expression),
+          ')',
+        )),
 
         preproc_extension: $ => seq(
           field('directive', $.preproc_directive),
