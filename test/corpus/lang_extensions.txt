@@ -1,0 +1,171 @@
+================================================================================
+Language Extensions
+================================================================================
+
+#version 460 core
+#extension GL_EXT_ray_tracing : require
+#extension GL_EXT_buffer_reference2
+#line 42
+#error "compile-time check failed"
+#
+# custom_directive with_args
+
+layout(set = 0, binding = 0) uniform accelerationStructureEXT topLevel;
+
+struct HitPayload {
+  vec3 color;
+  float distance;
+};
+
+layout(location = 0) rayPayloadEXT HitPayload payload;
+layout(location = 1) rayPayloadInEXT HitPayload inPayload;
+hitAttributeEXT vec2 baryCoord;
+layout(shaderRecordEXT) buffer SBT { float data[]; };
+layout(location = 2) callableDataEXT vec4 callData;
+
+void main() {
+  traceRayEXT(topLevel, 0u, 0xFFu,
+    0, 0, 0,
+    vec3(0.0), 0.001,
+    vec3(1.0), 100.0,
+    0);
+}
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (preproc_version)
+  (preproc_extension
+    (preproc_arg))
+  (preproc_extension
+    (preproc_arg))
+  (preproc_line
+    (preproc_arg))
+  (preproc_error
+    (preproc_arg))
+  (preproc_nothing)
+  (preproc_call
+    (preproc_directive)
+    (preproc_arg))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (layout_qualifier
+              (layout_argument
+                (identifier)
+                (number_literal))
+              (layout_argument
+                (identifier)
+                (number_literal)))
+            (storage_qualifier))
+          (type_specifier))
+        (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_specifier
+            (struct_specifier
+              (identifier)
+              (field_declaration_list
+                (field_declaration
+                  (type_specifier)
+                  (field_declarator_list
+                    (field_declarator
+                      (identifier))))
+                (field_declaration
+                  (type_specifier)
+                  (field_declarator_list
+                    (field_declarator
+                      (identifier)))))))))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (layout_qualifier
+              (layout_argument
+                (identifier)
+                (number_literal)))
+            (storage_qualifier))
+          (type_specifier
+            (type_identifier)))
+        (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (layout_qualifier
+              (layout_argument
+                (identifier)
+                (number_literal)))
+            (storage_qualifier))
+          (type_specifier
+            (type_identifier)))
+        (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (storage_qualifier))
+          (type_specifier))
+        (identifier))))
+  (declaration
+    (type_qualifier
+      (layout_qualifier
+        (layout_argument
+          (identifier)))
+      (storage_qualifier))
+    (identifier)
+    (field_declaration_list
+      (field_declaration
+        (type_specifier)
+        (field_declarator_list
+          (field_declarator
+            (identifier)
+            (array_specifier))))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (layout_qualifier
+              (layout_argument
+                (identifier)
+                (number_literal)))
+            (storage_qualifier))
+          (type_specifier))
+        (identifier))))
+  (function_definition
+    (function_prototype
+      (function_declarator
+        (type
+          (type_specifier))
+        (identifier)))
+    (compound_statement
+      (statement_list
+        (expression_statement
+          (function_call
+            (identifier)
+            (argument_list
+              (identifier)
+              (number_literal)
+              (number_literal)
+              (number_literal)
+              (number_literal)
+              (number_literal)
+              (function_call
+                (type_specifier)
+                (argument_list
+                  (number_literal)))
+              (number_literal)
+              (function_call
+                (type_specifier)
+                (argument_list
+                  (number_literal)))
+              (number_literal)
+              (number_literal))))))))

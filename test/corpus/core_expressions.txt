@@ -1,0 +1,283 @@
+================================================================================
+Core Expressions
+================================================================================
+
+void main() {
+  float a = 1.0 + 2.0 * 3.0;
+  float b = a > 0.0 ? 1.0 : 0.0;
+  vec4 c = vec4(a, b, 0.0, 1.0);
+  float d = c.x + c.y;
+  float e = -a;
+  int f = 1 << 2 | 3 & 4;
+  bool g = a > 0.0 && b < 1.0 || true;
+  a += 1.0;
+
+  // Parenthesized sub-expressions and unary/binary combos
+  float h = (a + b) * -(c.x);
+  float i = a + sin(b) - c[0];
+  float j = (a > 0.0 ? b : c.x);
+  bool k = (a > 0.0);
+  float l = (a);
+  bool m = true;
+  float n2 = a = 1.0;
+  int o2 = f++;
+  float n = -a + b;
+  float o = -1.0 * a;
+  float neg = -c.x;
+  float p = (sin(a));
+  float q = (c[0]);
+  float r = ((a));
+}
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (function_definition
+    (function_prototype
+      (function_declarator
+        return_type: (type
+          (type_specifier))
+        name: (identifier)))
+    (compound_statement
+      (statement_list
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (binary_expression
+                left: (number_literal)
+                right: (binary_expression
+                  left: (number_literal)
+                  right: (number_literal))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (conditional_expression
+                condition: (binary_expression
+                  left: (identifier)
+                  right: (number_literal))
+                consequence: (number_literal)
+                alternative: (number_literal)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (function_call
+                function: (type_specifier)
+                arguments: (argument_list
+                  (identifier)
+                  (identifier)
+                  (number_literal)
+                  (number_literal))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (binary_expression
+                left: (field_expression
+                  argument: (identifier)
+                  field: (field_identifier))
+                right: (field_expression
+                  argument: (identifier)
+                  field: (field_identifier))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (unary_expression
+                argument: (identifier)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (binary_expression
+                left: (binary_expression
+                  left: (number_literal)
+                  right: (number_literal))
+                right: (binary_expression
+                  left: (number_literal)
+                  right: (number_literal))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (binary_expression
+                left: (binary_expression
+                  left: (binary_expression
+                    left: (identifier)
+                    right: (number_literal))
+                  right: (binary_expression
+                    left: (identifier)
+                    right: (number_literal)))
+                right: (bool_literal)))))
+        (expression_statement
+          (assignment_expression
+            left: (identifier)
+            operator: (assignment_operator)
+            right: (number_literal)))
+        (comment)
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (binary_expression
+                left: (parenthesized_expression
+                  (binary_expression
+                    left: (identifier)
+                    right: (identifier)))
+                right: (unary_expression
+                  argument: (parenthesized_expression
+                    (field_expression
+                      argument: (identifier)
+                      field: (field_identifier))))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (binary_expression
+                left: (binary_expression
+                  left: (identifier)
+                  right: (function_call
+                    function: (identifier)
+                    arguments: (argument_list
+                      (identifier))))
+                right: (subscript_expression
+                  argument: (identifier)
+                  index: (number_literal))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (parenthesized_expression
+                (conditional_expression
+                  condition: (binary_expression
+                    left: (identifier)
+                    right: (number_literal))
+                  consequence: (identifier)
+                  alternative: (field_expression
+                    argument: (identifier)
+                    field: (field_identifier)))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (parenthesized_expression
+                (binary_expression
+                  left: (identifier)
+                  right: (number_literal))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (parenthesized_expression
+                (identifier)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (bool_literal))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (assignment_expression
+                left: (identifier)
+                operator: (assignment_operator)
+                right: (number_literal)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (update_expression
+                argument: (identifier)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (binary_expression
+                left: (unary_expression
+                  argument: (identifier))
+                right: (identifier)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (binary_expression
+                left: (unary_expression
+                  argument: (number_literal))
+                right: (identifier)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (unary_expression
+                argument: (field_expression
+                  argument: (identifier)
+                  field: (field_identifier))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (parenthesized_expression
+                (function_call
+                  function: (identifier)
+                  arguments: (argument_list
+                    (identifier)))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (parenthesized_expression
+                (subscript_expression
+                  argument: (identifier)
+                  index: (number_literal))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (parenthesized_expression
+                (parenthesized_expression
+                  (identifier))))))))))

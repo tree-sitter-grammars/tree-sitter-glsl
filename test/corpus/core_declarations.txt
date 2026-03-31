@@ -1,0 +1,433 @@
+================================================================================
+Core Declarations
+================================================================================
+
+#version 460 core
+precision mediump float;
+precision highp atomic_uint;
+layout(binding = 0) uniform sampler2D tex;
+uniform texture2D texObj;
+uniform sampler samp;
+
+struct Light {
+  vec3 position;
+  float intensity;
+};
+
+layout(location = 0) out vec4 colorOut;
+uniform Params {
+  mat4 proj;
+  vec4 tint;
+} params[2];
+
+void processLight(vec3 dir, float intensity);
+subroutine(ShadingFunc, LightFunc) void shade();
+out a, b, c;
+
+struct Material {
+  readonly float reflectance;
+};
+
+const vec3 palette[3] = {
+  vec3(1.0, 0.0, 0.0),
+  vec3(0.0, 1.0, 0.0),
+  -vec3(0.0, 0.0, 1.0),
+};
+
+const uint flags = 0x10u;
+float weights[2] = {1.0, .5};
+
+struct Vertex {
+  float data[3];
+#define VERT_STRIDE 3
+#define VERT_SZ(n) (n * VERT_STRIDE)
+#undef OLD_STRIDE
+# custom_annotation
+#ifdef HAS_NORMAL
+  vec3 normal;
+#else
+  vec3 fallbackNormal;
+#endif
+#if defined(HAS_UV)
+  vec2 uv;
+#endif
+};
+
+float[4] anonymous_array;
+mat2 transforms[2] = {
+  {1.0, 0.0, 0.0, 1.0},
+  {0.0, 1.0, 1.0, 0.0},
+};
+
+mediump float lowRes;
+invariant out vec4 gl_Position;
+flat in vec3 vertColor;
+precise float result;
+
+void process(const in float values[4]) {
+  Vertex v;
+  float x = v.data[0];
+  float y = v.data;
+  float z = -v.data[1];
+  float w = x;
+}
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (preproc_version)
+  (declaration
+    (precision_qualifier)
+    (type_specifier))
+  (declaration
+    (precision_qualifier)
+    (type_specifier))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (layout_qualifier
+              (layout_argument
+                name: (identifier)
+                value: (number_literal)))
+            (storage_qualifier))
+          (type_specifier))
+        name: (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (storage_qualifier))
+          (type_specifier))
+        name: (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (storage_qualifier))
+          (type_specifier))
+        name: (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_specifier
+            (struct_specifier
+              name: (identifier)
+              (field_declaration_list
+                (field_declaration
+                  (type_specifier)
+                  (field_declarator_list
+                    (field_declarator
+                      name: (identifier))))
+                (field_declaration
+                  (type_specifier)
+                  (field_declarator_list
+                    (field_declarator
+                      name: (identifier)))))))))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (layout_qualifier
+              (layout_argument
+                name: (identifier)
+                value: (number_literal)))
+            (storage_qualifier))
+          (type_specifier))
+        name: (identifier))))
+  (declaration
+    (type_qualifier
+      (storage_qualifier))
+    name: (identifier)
+    (field_declaration_list
+      (field_declaration
+        (type_specifier)
+        (field_declarator_list
+          (field_declarator
+            name: (identifier))))
+      (field_declaration
+        (type_specifier)
+        (field_declarator_list
+          (field_declarator
+            name: (identifier)))))
+    instance_name: (identifier)
+    (array_specifier
+      (number_literal)))
+  (declaration
+    (function_prototype
+      (function_declarator
+        return_type: (type
+          (type_specifier))
+        name: (identifier)
+        parameters: (parameter_list
+          (parameter_declaration
+            type: (type_specifier)
+            name: (identifier))
+          (parameter_declaration
+            type: (type_specifier)
+            name: (identifier))))))
+  (declaration
+    (function_prototype
+      (function_declarator
+        return_type: (type
+          (type_qualifier
+            (storage_qualifier
+              (type_name_list
+                (identifier)
+                (identifier))))
+          (type_specifier))
+        name: (identifier))))
+  (declaration
+    (type_qualifier
+      (storage_qualifier))
+    (identifier_list
+      (identifier)
+      (identifier)
+      (identifier)))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_specifier
+            (struct_specifier
+              name: (identifier)
+              (field_declaration_list
+                (field_declaration
+                  (type_qualifier
+                    (storage_qualifier))
+                  (type_specifier)
+                  (field_declarator_list
+                    (field_declarator
+                      name: (identifier)))))))))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (storage_qualifier))
+          (type_specifier))
+        name: (identifier)
+        (array_specifier
+          (number_literal))
+        value: (initializer
+          (initializer_list
+            (function_call
+              function: (type_specifier)
+              arguments: (argument_list
+                (number_literal)
+                (number_literal)
+                (number_literal)))
+            (function_call
+              function: (type_specifier)
+              arguments: (argument_list
+                (number_literal)
+                (number_literal)
+                (number_literal)))
+            (unary_expression
+              argument: (function_call
+                function: (type_specifier)
+                arguments: (argument_list
+                  (number_literal)
+                  (number_literal)
+                  (number_literal)))))))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (storage_qualifier))
+          (type_specifier))
+        name: (identifier)
+        value: (number_literal))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_specifier))
+        name: (identifier)
+        (array_specifier
+          (number_literal))
+        value: (initializer
+          (initializer_list
+            (number_literal)
+            (number_literal))))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_specifier
+            (struct_specifier
+              name: (identifier)
+              (field_declaration_list
+                (field_declaration
+                  (type_specifier)
+                  (field_declarator_list
+                    (field_declarator
+                      name: (identifier)
+                      (array_specifier
+                        (number_literal)))))
+                (preproc_def
+                  name: (identifier)
+                  value: (preproc_arg))
+                (preproc_function_def
+                  name: (identifier)
+                  parameters: (preproc_params
+                    (identifier))
+                  value: (preproc_arg))
+                (preproc_undef
+                  name: (identifier))
+                (preproc_call
+                  directive: (preproc_directive))
+                (preproc_ifdef
+                  name: (identifier)
+                  (field_declaration
+                    (type_specifier)
+                    (field_declarator_list
+                      (field_declarator
+                        name: (identifier))))
+                  alternative: (preproc_else
+                    (field_declaration
+                      (type_specifier)
+                      (field_declarator_list
+                        (field_declarator
+                          name: (identifier))))))
+                (preproc_if
+                  condition: (preproc_defined
+                    (identifier))
+                  (field_declaration
+                    (type_specifier)
+                    (field_declarator_list
+                      (field_declarator
+                        name: (identifier))))))))))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_specifier
+            (array_specifier
+              (number_literal))))
+        name: (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_specifier))
+        name: (identifier)
+        (array_specifier
+          (number_literal))
+        value: (initializer
+          (initializer_list
+            (initializer
+              (initializer_list
+                (number_literal)
+                (number_literal)
+                (number_literal)
+                (number_literal)))
+            (initializer
+              (initializer_list
+                (number_literal)
+                (number_literal)
+                (number_literal)
+                (number_literal))))))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (precision_qualifier))
+          (type_specifier))
+        name: (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (invariant_qualifier)
+            (storage_qualifier))
+          (type_specifier))
+        name: (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (interpolation_qualifier)
+            (storage_qualifier))
+          (type_specifier))
+        name: (identifier))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_qualifier
+            (precise_qualifier))
+          (type_specifier))
+        name: (identifier))))
+  (function_definition
+    (function_prototype
+      (function_declarator
+        return_type: (type
+          (type_specifier))
+        name: (identifier)
+        parameters: (parameter_list
+          (parameter_declaration
+            (type_qualifier
+              (storage_qualifier)
+              (storage_qualifier))
+            type: (type_specifier)
+            name: (identifier)
+            (array_specifier
+              (number_literal))))))
+    (compound_statement
+      (statement_list
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier
+                  (type_identifier)))
+              name: (identifier))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (subscript_expression
+                argument: (field_expression
+                  argument: (identifier)
+                  field: (field_identifier))
+                index: (number_literal)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (field_expression
+                argument: (identifier)
+                field: (field_identifier)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (unary_expression
+                argument: (subscript_expression
+                  argument: (field_expression
+                    argument: (identifier)
+                    field: (field_identifier))
+                  index: (number_literal))))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (identifier))))))))

@@ -1,5 +1,10 @@
-node_modules
-build
-target
-*.a
-*.pc
+# Node dependencies
+/node_modules
+
+# Build files
+/build
+target/
+
+# Cache
+/.pytest_cache
+__pycache__/

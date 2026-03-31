@@ -1,0 +1,558 @@
+================================================================================
+Language Injections
+================================================================================
+
+#ifndef __cplusplus
+#define GLSL_ONLY 1
+#undef NOT_GLSL
+#pragma optimize(on)
+#extension GL_EXT_debug : enable
+#line 50
+#error "glsl only check"
+#
+#version 460
+void glslFunc() {}
+float glsl_only = 1.0;
+#ifdef INNER_GUARD
+int inner = 0;
+#endif
+#if INNER_COND > 0
+int inner2 = 1;
+#endif
+#else
+namespace fallback {}
+#endif
+
+#if !defined(__cplusplus)
+# lang_if_call
+#define ALSO_GLSL 1
+#define LIF_MACRO(x) (x)
+#undef LIF_OLD
+#pragma optimize(on)
+#extension GL_EXT_test : enable
+#line 999
+#error "lang_if check"
+#
+#version 460
+void alsoGlsl() {}
+float also_glsl = 2.0;
+#ifdef NESTED_IN_LANG_IF
+int nested = 0;
+#endif
+#if NESTED_COND
+int nested2 = 0;
+#endif
+#ifndef __STDC__
+float not_stdc = 0.0;
+#endif
+#else
+namespace cpp {}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#else
+// GLSL path
+#endif
+
+#ifdef __STDC__
+typedef int GLint;
+#endif
+
+#if defined(__STDC__)
+typedef float GLfloat;
+#endif
+
+#if defined(__cplusplus) || defined(__STDC__)
+#include <stdint.h>
+#endif
+
+#if defined(__STDC__)
+typedef unsigned uint32_t;
+#elif defined(__cplusplus)
+#include <cstdint>
+#else
+// GLSL path
+#endif
+
+#if !defined(__STDC__)
+float not_c_either = 1.0;
+#endif
+
+#ifndef __STDC__
+float glsl_not_c = 1.0;
+#else
+typedef unsigned int uint32_t;
+#endif
+
+#ifdef SHARED_HEADER
+#ifdef __cplusplus
+extern "C" { void shared_cpp(); }
+#endif
+#ifndef __cplusplus
+float glsl_in_ifdef = 1.0;
+#endif
+#ifndef __STDC__
+float not_c_in_ifdef = 2.0;
+#endif
+#elif defined(ALT_HEADER)
+#ifdef __cplusplus
+extern "C" { void alt(); }
+#endif
+#else
+#ifndef __cplusplus
+float glsl_in_else = 3.0;
+#endif
+#endif
+
+#if VARIANT > 0
+#ifdef __cplusplus
+namespace ns {}
+#endif
+#if defined(__cplusplus)
+#include <cstdio>
+#endif
+#endif
+
+#ifdef ANOTHER_GUARD
+#if defined(__cplusplus)
+#include <vector>
+#endif
+#elif defined(FALLBACK)
+#if defined(__cplusplus)
+#include <list>
+#endif
+#else
+#if defined(__cplusplus)
+#include <deque>
+#endif
+#endif
+
+#ifndef __cplusplus
+# preproc_call_in_lang
+#define LNG_MACRO(x) (x)
+#if defined(__cplusplus)
+#include <set>
+#endif
+#endif
+
+#if !defined(__cplusplus)
+#if defined(__cplusplus)
+#include <map>
+#endif
+#ifndef __cplusplus
+float nested_ifndef = 0.0;
+#endif
+#ifdef __cplusplus
+extern "C" { void nested_ifdef(); }
+#endif
+#endif
+
+#if DEEP > 0
+#ifndef __cplusplus
+float deep_glsl = 0.0;
+#endif
+#elif DEEP > 1
+#ifndef __cplusplus
+float deep_elif = 0.0;
+#endif
+#else
+#ifndef __cplusplus
+float deep_else = 0.0;
+#endif
+#ifdef __cplusplus
+extern "C" { void deep_else_cpp(); }
+#endif
+#endif
+
+#ifndef __cplusplus
+#ifndef __cplusplus
+float double_guard = 0.0;
+#endif
+#ifdef __cplusplus
+extern "C" { void inner_cpp(); }
+#endif
+#endif
+
+#if defined(__cplusplus)
+#include <cstdint>
+#elif defined(__STDC__)
+#include <stdint.h>
+#else
+// GLSL path
+#endif
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (preproc_language_ifndef
+    (preproc_cpp_language_macro)
+    (preproc_def
+      (identifier)
+      (preproc_arg))
+    (preproc_undef
+      (identifier))
+    (preproc_pragma
+      (preproc_arg))
+    (preproc_extension
+      (preproc_arg))
+    (preproc_line
+      (preproc_arg))
+    (preproc_error
+      (preproc_arg))
+    (preproc_nothing)
+    (preproc_version)
+    (function_definition
+      (function_prototype
+        (function_declarator
+          (type
+            (type_specifier))
+          (identifier)))
+      (compound_statement))
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier))
+          (identifier)
+          (number_literal))))
+    (preproc_ifdef
+      (identifier)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_if
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_else
+      (multilingual_cpp_code_block
+        (multilingual_code_line))))
+  (preproc_language_if
+    (preproc_not_cpp_condition
+      (preproc_cpp_language_check
+        (preproc_cpp_language_macro)))
+    (preproc_call
+      (preproc_directive))
+    (preproc_def
+      (identifier)
+      (preproc_arg))
+    (preproc_function_def
+      (identifier)
+      (preproc_params
+        (identifier))
+      (preproc_arg))
+    (preproc_undef
+      (identifier))
+    (preproc_pragma
+      (preproc_arg))
+    (preproc_extension
+      (preproc_arg))
+    (preproc_line
+      (preproc_arg))
+    (preproc_error
+      (preproc_arg))
+    (preproc_nothing)
+    (preproc_version)
+    (function_definition
+      (function_prototype
+        (function_declarator
+          (type
+            (type_specifier))
+          (identifier)))
+      (compound_statement))
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier))
+          (identifier)
+          (number_literal))))
+    (preproc_ifdef
+      (identifier)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_if
+      (identifier)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_language_ifndef
+      (preproc_c_language_macro)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_else
+      (multilingual_cpp_code_block
+        (multilingual_code_line))))
+  (preproc_language_ifdef
+    (preproc_cpp_language_macro)
+    (multilingual_cpp_code_block
+      (multilingual_code_line))
+    (preproc_else)
+    (comment))
+  (preproc_language_ifdef
+    (preproc_c_language_macro)
+    (multilingual_c_code_block
+      (multilingual_code_line)))
+  (preproc_language_if
+    (preproc_c_condition
+      (preproc_c_language_check
+        (preproc_c_language_macro)))
+    (multilingual_c_code_block
+      (multilingual_code_line)))
+  (preproc_language_if
+    (preproc_cpp_condition
+      (preproc_cpp_language_check
+        (preproc_cpp_language_macro))
+      (preproc_c_language_check
+        (preproc_c_language_macro)))
+    (multilingual_cpp_code_block
+      (multilingual_code_line)))
+  (preproc_language_if
+    (preproc_c_condition
+      (preproc_c_language_check
+        (preproc_c_language_macro)))
+    (multilingual_c_code_block
+      (multilingual_code_line))
+    (preproc_elif
+      (preproc_cpp_condition
+        (preproc_cpp_language_check
+          (preproc_cpp_language_macro)))
+      (multilingual_cpp_code_block
+        (multilingual_code_line))
+      (preproc_else))
+    (comment))
+  (preproc_language_if
+    (preproc_not_c_condition
+      (preproc_c_language_check
+        (preproc_c_language_macro)))
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier))
+          (identifier)
+          (number_literal)))))
+  (preproc_language_ifndef
+    (preproc_c_language_macro)
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier))
+          (identifier)
+          (number_literal))))
+    (preproc_else
+      (multilingual_c_code_block
+        (multilingual_code_line))))
+  (preproc_ifdef
+    (identifier)
+    (preproc_language_ifdef
+      (preproc_cpp_language_macro)
+      (multilingual_cpp_code_block
+        (multilingual_code_line)))
+    (preproc_language_ifndef
+      (preproc_cpp_language_macro)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_language_ifndef
+      (preproc_c_language_macro)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_elif
+      (preproc_defined
+        (identifier))
+      (preproc_language_ifdef
+        (preproc_cpp_language_macro)
+        (multilingual_cpp_code_block
+          (multilingual_code_line)))
+      (preproc_else
+        (preproc_language_ifndef
+          (preproc_cpp_language_macro)
+          (declaration
+            (declarator_list
+              (declarator
+                (type
+                  (type_specifier))
+                (identifier)
+                (number_literal))))))))
+  (preproc_if
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (preproc_language_ifdef
+      (preproc_cpp_language_macro)
+      (multilingual_cpp_code_block
+        (multilingual_code_line)))
+    (preproc_language_if
+      (preproc_cpp_condition
+        (preproc_cpp_language_check
+          (preproc_cpp_language_macro)))
+      (multilingual_cpp_code_block
+        (multilingual_code_line))))
+  (preproc_ifdef
+    (identifier)
+    (preproc_language_if
+      (preproc_cpp_condition
+        (preproc_cpp_language_check
+          (preproc_cpp_language_macro)))
+      (multilingual_cpp_code_block
+        (multilingual_code_line)))
+    (preproc_elif
+      (preproc_defined
+        (identifier))
+      (preproc_language_if
+        (preproc_cpp_condition
+          (preproc_cpp_language_check
+            (preproc_cpp_language_macro)))
+        (multilingual_cpp_code_block
+          (multilingual_code_line)))
+      (preproc_else
+        (preproc_language_if
+          (preproc_cpp_condition
+            (preproc_cpp_language_check
+              (preproc_cpp_language_macro)))
+          (multilingual_cpp_code_block
+            (multilingual_code_line))))))
+  (preproc_language_ifndef
+    (preproc_cpp_language_macro)
+    (preproc_call
+      (preproc_directive))
+    (preproc_function_def
+      (identifier)
+      (preproc_params
+        (identifier))
+      (preproc_arg))
+    (preproc_language_if
+      (preproc_cpp_condition
+        (preproc_cpp_language_check
+          (preproc_cpp_language_macro)))
+      (multilingual_cpp_code_block
+        (multilingual_code_line))))
+  (preproc_language_if
+    (preproc_not_cpp_condition
+      (preproc_cpp_language_check
+        (preproc_cpp_language_macro)))
+    (preproc_language_if
+      (preproc_cpp_condition
+        (preproc_cpp_language_check
+          (preproc_cpp_language_macro)))
+      (multilingual_cpp_code_block
+        (multilingual_code_line)))
+    (preproc_language_ifndef
+      (preproc_cpp_language_macro)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_language_ifdef
+      (preproc_cpp_language_macro)
+      (multilingual_cpp_code_block
+        (multilingual_code_line))))
+  (preproc_if
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (preproc_language_ifndef
+      (preproc_cpp_language_macro)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_elif
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (preproc_language_ifndef
+        (preproc_cpp_language_macro)
+        (declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              (identifier)
+              (number_literal)))))
+      (preproc_else
+        (preproc_language_ifndef
+          (preproc_cpp_language_macro)
+          (declaration
+            (declarator_list
+              (declarator
+                (type
+                  (type_specifier))
+                (identifier)
+                (number_literal)))))
+        (preproc_language_ifdef
+          (preproc_cpp_language_macro)
+          (multilingual_cpp_code_block
+            (multilingual_code_line))))))
+  (preproc_language_ifndef
+    (preproc_cpp_language_macro)
+    (preproc_language_ifndef
+      (preproc_cpp_language_macro)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            (identifier)
+            (number_literal)))))
+    (preproc_language_ifdef
+      (preproc_cpp_language_macro)
+      (multilingual_cpp_code_block
+        (multilingual_code_line))))
+  (preproc_language_if
+    (preproc_cpp_condition
+      (preproc_cpp_language_check
+        (preproc_cpp_language_macro)))
+    (multilingual_cpp_code_block
+      (multilingual_code_line))
+    (preproc_elif
+      (preproc_c_condition
+        (preproc_c_language_check
+          (preproc_c_language_macro)))
+      (multilingual_c_code_block
+        (multilingual_code_line))
+      (preproc_else))
+    (comment)))

@@ -3,16 +3,17 @@ name: CI
 on:
   push:
     branches: [master]
-    paths:
   pull_request:
 
 jobs:
-  build:
-    name: Run tests
+  test:
+    name: Grammar tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: tree-sitter/setup-action@v1
+        with:
+          submodules: true
+      - uses: tree-sitter/setup-action@v2
         with:
           install-lib: false
       - uses: tree-sitter/parser-test-action@v2
@@ -22,3 +23,44 @@ jobs:
           test-python: true
           test-go: true
           test-swift: true
+          node-version: "22"
+
+  lint:
+    name: Lint & type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx eslint
+      - run: npx tsc --noEmit
+
+  coverage:
+    name: Grammar coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - uses: tree-sitter/setup-action@v2
+        with:
+          install-lib: false
+      - run: npm ci
+      - run: npx tree-sitter generate
+      - name: Check coverage
+        run: |
+          output=$(node scripts/audit_node_types.js --coverage 2>&1)
+          echo "$output"
+          echo "### Coverage" >> "$GITHUB_STEP_SUMMARY"
+          echo "$output" | grep -E '^\s+(Rule|Combination|Concrete)' >> "$GITHUB_STEP_SUMMARY"
+          if ! echo "$output" | grep -q 'Rule coverage:.*100.0%'; then
+            echo "::error::Rule coverage is not 100%"
+            exit 1
+          fi

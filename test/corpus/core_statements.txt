@@ -1,0 +1,252 @@
+================================================================================
+Core Statements
+================================================================================
+
+void main() {
+  float;
+
+  int x = 0;
+  if (x > 0) {
+    x = 1;
+  } else {
+    x = 2;
+  }
+  for (int i = 0; i < 10; i++) {
+    x += i;
+  }
+  while (x > 0) {
+    x--;
+  }
+  do {
+    x++;
+  } while (x < 5);
+  switch (x) {
+    case 0:
+      break;
+    case 1:
+      x = 10;
+      break;
+    default:
+      discard;
+  }
+  while (hasNext())
+    x++;
+  for (int i = 0, j = 3; i < 4; i++, j--)
+    x += i;
+  for (; x < 100; x++)
+    x *= 2;
+  for (; bool done = x == 0; )
+    x--;
+  while (bool found = x == 0)
+    return;
+  while (int val = {0})
+    break;
+  do x++; while (x < 8);
+  if (x > 0) x = -x;
+  else x = 0;
+  x += 1, x -= 1;
+  return;
+}
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (function_definition
+    (function_prototype
+      (function_declarator
+        return_type: (type
+          (type_specifier))
+        name: (identifier)))
+    (compound_statement
+      (statement_list
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier)))))
+        (local_declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_specifier))
+              name: (identifier)
+              value: (number_literal))))
+        (if_statement
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal))
+          consequence: (compound_statement
+            (statement_list
+              (expression_statement
+                (assignment_expression
+                  left: (identifier)
+                  operator: (assignment_operator)
+                  right: (number_literal)))))
+          alternative: (else_clause
+            (compound_statement
+              (statement_list
+                (expression_statement
+                  (assignment_expression
+                    left: (identifier)
+                    operator: (assignment_operator)
+                    right: (number_literal)))))))
+        (for_statement
+          initializer: (local_declaration
+            (declarator_list
+              (declarator
+                (type
+                  (type_specifier))
+                name: (identifier)
+                value: (number_literal))))
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal))
+          update: (update_expression
+            argument: (identifier))
+          body: (compound_statement
+            (statement_list
+              (expression_statement
+                (assignment_expression
+                  left: (identifier)
+                  operator: (assignment_operator)
+                  right: (identifier))))))
+        (while_statement
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal))
+          body: (compound_statement
+            (statement_list
+              (expression_statement
+                (update_expression
+                  argument: (identifier))))))
+        (do_statement
+          body: (compound_statement
+            (statement_list
+              (expression_statement
+                (update_expression
+                  argument: (identifier)))))
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal)))
+        (switch_statement
+          condition: (identifier)
+          (statement_list
+            (case_label
+              value: (number_literal))
+            (break_statement)
+            (case_label
+              value: (number_literal))
+            (expression_statement
+              (assignment_expression
+                left: (identifier)
+                operator: (assignment_operator)
+                right: (number_literal)))
+            (break_statement)
+            (case_label)
+            (discard_statement)))
+        (while_statement
+          condition: (function_call
+            function: (identifier))
+          body: (expression_statement
+            (update_expression
+              argument: (identifier))))
+        (for_statement
+          initializer: (local_declaration
+            (declarator_list
+              (declarator
+                (type
+                  (type_specifier))
+                name: (identifier)
+                value: (number_literal))
+              (declarator
+                name: (identifier)
+                value: (number_literal))))
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal))
+          update: (comma_expression
+            left: (update_expression
+              argument: (identifier))
+            right: (update_expression
+              argument: (identifier)))
+          body: (expression_statement
+            (assignment_expression
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (identifier))))
+        (for_statement
+          initializer: (expression_statement)
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal))
+          update: (update_expression
+            argument: (identifier))
+          body: (expression_statement
+            (assignment_expression
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (number_literal))))
+        (for_statement
+          initializer: (expression_statement)
+          condition: (condition
+            (type
+              (type_specifier))
+            name: (identifier)
+            (binary_expression
+              left: (identifier)
+              right: (number_literal)))
+          body: (expression_statement
+            (update_expression
+              argument: (identifier))))
+        (while_statement
+          condition: (condition
+            (type
+              (type_specifier))
+            name: (identifier)
+            (binary_expression
+              left: (identifier)
+              right: (number_literal)))
+          body: (return_statement))
+        (while_statement
+          condition: (condition
+            (type
+              (type_specifier))
+            name: (identifier)
+            (initializer
+              (initializer_list
+                (number_literal))))
+          body: (break_statement))
+        (do_statement
+          body: (expression_statement
+            (update_expression
+              argument: (identifier)))
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal)))
+        (if_statement
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal))
+          consequence: (expression_statement
+            (assignment_expression
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (unary_expression
+                argument: (identifier))))
+          alternative: (else_clause
+            (expression_statement
+              (assignment_expression
+                left: (identifier)
+                operator: (assignment_operator)
+                right: (number_literal)))))
+        (expression_statement
+          (comma_expression
+            left: (assignment_expression
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (number_literal))
+            right: (assignment_expression
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (number_literal))))
+        (return_statement)))))

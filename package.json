@@ -1,7 +1,7 @@
 {
   "name": "tree-sitter-glsl",
-  "version": "0.2.0",
-  "description": "GLSL grammar for tree-sitter (based on tree-sitter-c)",
+  "version": "0.3.0",
+  "description": "GLSL grammar for tree-sitter",
   "main": "bindings/node",
   "types": "bindings/node",
   "keywords": [
@@ -16,14 +16,14 @@
     "queries/*",
     "src/**"
   ],
-  "author": "Stephan Seitz",
+  "author": "Tin Švagelj",
   "license": "MIT",
   "dependencies": {
     "node-addon-api": "^7.1.0",
     "node-gyp-build": "^4.8.0"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.22.1"
+    "tree-sitter": "^0.25.0"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
@@ -31,18 +31,45 @@
     }
   },
   "devDependencies": {
-    "tree-sitter-c": "git://github.com/tree-sitter/tree-sitter-c.git",
-    "tree-sitter-cli": "^0.24.7",
-    "prebuildify": "^6.0.0"
+    "@types/node": "^25.5.0",
+    "eslint": "^9.39.4",
+    "eslint-config-treesitter": "^1.0.2",
+    "globals": "^17.4.0",
+    "prebuildify": "^6.0.0",
+    "tree-sitter-cli": "^0.26.7",
+    "typescript": "^6.0.2",
+    "xml-js": "^1.6.11"
   },
   "scripts": {
-    "test": "tree-sitter test",
-    "test-windows": "tree-sitter test",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
+    "prebuildify": "prebuildify --napi --strip",
+    "generate:highlights": "node scripts/generate_highlights.js",
+    "test": "tree-sitter test",
+    "test:bindings": "npm run test:bindings:node && npm run test:bindings:rust && npm run test:bindings:go && npm run test:bindings:python && npm run test:bindings:swift",
+    "test:bindings:node": "node bindings/node/binding_test.js",
+    "test:bindings:rust": "cargo test",
+    "test:bindings:go": "cd bindings/go && go test",
+    "test:bindings:python": "python -m pytest bindings/python/tests",
+    "test:bindings:swift": "swift test",
+    "check:names": "node scripts/scrape_identifiers.js specification",
+    "check:ast": "node scripts/audit_node_types.js",
+    "check:coverage": "node scripts/audit_node_types.js --coverage",
+    "check:lint": "eslint",
+    "check:types": "tsc --noEmit"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git://github.com/theHamsta/tree-sitter-glsl.git"
-  }
+  },
+  "contributors": [
+    {
+      "name": "Stephan Seitz",
+      "email": "stephan.seitz@fau.de"
+    },
+    {
+      "name": "Tin Švagelj",
+      "email": "tin.svagelj@live.com"
+    }
+  ]
 }

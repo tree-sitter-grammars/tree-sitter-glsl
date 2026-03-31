@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
   "grammars": [
     {
       "name": "glsl",
@@ -20,19 +21,26 @@
     "description": "GLSL grammar for tree-sitter (based on tree-sitter-c)",
     "authors": [
       {
-        "name": "Stephan Seitz"
+        "name": "Stephan Seitz",
+        "email": "stephan.seitz@fau.de"
+      },
+      {
+        "name": "Tin Švagelj",
+        "email": "tin.svagelj@live.com"
       }
     ],
     "links": {
-      "repository": "git://github.com/theHamsta/tree-sitter-glsl.git"
+      "repository": "git://github.com/tree-sitter-grammars/tree-sitter-glsl.git"
     }
   },
   "bindings": {
     "c": true,
     "go": true,
+    "java": false,
     "node": true,
     "python": true,
     "rust": true,
-    "swift": true
+    "swift": true,
+    "zig": false
   }
 }

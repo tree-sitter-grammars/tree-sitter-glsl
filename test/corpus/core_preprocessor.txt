@@ -1,0 +1,544 @@
+================================================================================
+Core Preprocessor
+================================================================================
+
+#version 460 core
+#pragma optimize(on)
+#define ENABLED 1
+#undef DISABLED
+
+#ifdef ENABLED
+struct S {
+  int x;
+};
+#else
+struct T {
+  int z;
+};
+#endif
+
+#ifdef MODE_A
+int a = 1;
+#elif defined(MODE_B)
+#pragma debug(on)
+#extension GL_ARB_test : enable
+#line 500
+#error "mode_b error"
+#
+int b = 2;
+#endif
+
+struct ElifFields {
+#ifdef FIELD_A
+  int a;
+#elif defined(FIELD_B)
+  int b;
+#endif
+};
+
+#if defined(X) && defined(Y)
+int both = 1;
+#endif
+
+#if defined(Z) || !defined(W)
+int either = 1;
+#endif
+
+#if (defined(PARENS))
+int wrapped = 1;
+#endif
+
+#ifdef PLATFORM_CONFIG
+#pragma optimize(off)
+#extension GL_ARB_gpu_shader5 : enable
+#line 100
+#error "wrong platform"
+#
+#version 460
+#endif
+
+#if RENDER_PASS == 1
+#pragma debug(on)
+#extension GL_EXT_shader_io : require
+#line 200
+#error "pass1 error"
+#
+#version 450
+#elif RENDER_PASS == 2
+#version 430
+#else
+#pragma once
+#extension GL_EXT_shader_texture : enable
+#line 300
+#error "fallback"
+#
+#version 440
+#endif
+
+#ifdef HAS_HELPER
+void helper() {}
+#else
+void fallback() {}
+#endif
+
+#if defined(HAS_TEXTURES)
+#define SAMPLE(t, uv) texture(t, uv)
+#define MIX(a, b, t) mix(a, b, t)
+#ifdef USE_SRGB
+vec3 gamma(vec3 c) { return pow(c, vec3(2.2)); }
+#define GAMMA_FN(x) gamma(x)
+#endif
+#elif VERSION >= 300
+#pragma debug(on)
+const float scale = 1.0;
+#else
+#define SAMPLE(t, uv) texture2D(t, uv)
+#define MIX(a, b, t) ((a) + (b) * (t))
+const float scale = 0.5;
+#endif
+
+#if defined(PASS_1)
+#define PASS1_VAL 1
+void pass1() {}
+float pass1_data[4];
+#if defined(PASS_1A)
+int sub = 0;
+#endif
+#elif defined(PASS_2)
+#define PASS2_VAL 2
+#ifdef PASS_2_EXTRA
+#define EXTRA(x) (x)
+#endif
+void pass2() {}
+#elif defined(PASS_3)
+#define P3(x) (x)
+#if VARIANT == 1
+int variant = 1;
+#endif
+#else
+#define DEFAULT_VAL 0
+#endif
+
+#ifdef BLOCK_A
+#define A_CONST 1
+#ifdef BLOCK_A_SUB
+#define A_SUB 2
+#endif
+#endif
+
+#if QUALITY > 0
+const int samples = 16;
+#else
+const int samples = 4;
+#endif
+
+void main() {
+#ifdef ENABLED
+  int v = 1;
+#else
+  int v = 2;
+#endif
+}
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (preproc_version)
+  (preproc_pragma
+    argument: (preproc_arg))
+  (preproc_def
+    name: (identifier)
+    value: (preproc_arg))
+  (preproc_undef
+    name: (identifier))
+  (preproc_ifdef
+    name: (identifier)
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier
+              (struct_specifier
+                name: (identifier)
+                (field_declaration_list
+                  (field_declaration
+                    (type_specifier)
+                    (field_declarator_list
+                      (field_declarator
+                        name: (identifier)))))))))))
+    alternative: (preproc_else
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier
+                (struct_specifier
+                  name: (identifier)
+                  (field_declaration_list
+                    (field_declaration
+                      (type_specifier)
+                      (field_declarator_list
+                        (field_declarator
+                          name: (identifier)))))))))))))
+  (preproc_ifdef
+    name: (identifier)
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier))
+          name: (identifier)
+          value: (number_literal))))
+    alternative: (preproc_elif
+      condition: (preproc_defined
+        (identifier))
+      (preproc_pragma
+        argument: (preproc_arg))
+      (preproc_extension
+        argument: (preproc_arg))
+      (preproc_line
+        argument: (preproc_arg))
+      (preproc_error
+        message: (preproc_arg))
+      (preproc_nothing)
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            name: (identifier)
+            value: (number_literal))))))
+  (declaration
+    (declarator_list
+      (declarator
+        (type
+          (type_specifier
+            (struct_specifier
+              name: (identifier)
+              (field_declaration_list
+                (preproc_ifdef
+                  name: (identifier)
+                  (field_declaration
+                    (type_specifier)
+                    (field_declarator_list
+                      (field_declarator
+                        name: (identifier))))
+                  alternative: (preproc_elif
+                    condition: (preproc_defined
+                      (identifier))
+                    (field_declaration
+                      (type_specifier)
+                      (field_declarator_list
+                        (field_declarator
+                          name: (identifier)))))))))))))
+  (preproc_if
+    condition: (binary_expression
+      left: (preproc_defined
+        (identifier))
+      right: (preproc_defined
+        (identifier)))
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier))
+          name: (identifier)
+          value: (number_literal)))))
+  (preproc_if
+    condition: (binary_expression
+      left: (preproc_defined
+        (identifier))
+      right: (unary_expression
+        argument: (preproc_defined
+          (identifier))))
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier))
+          name: (identifier)
+          value: (number_literal)))))
+  (preproc_if
+    condition: (parenthesized_expression
+      (preproc_defined
+        (identifier)))
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier))
+          name: (identifier)
+          value: (number_literal)))))
+  (preproc_ifdef
+    name: (identifier)
+    (preproc_pragma
+      argument: (preproc_arg))
+    (preproc_extension
+      argument: (preproc_arg))
+    (preproc_line
+      argument: (preproc_arg))
+    (preproc_error
+      message: (preproc_arg))
+    (preproc_nothing)
+    (preproc_version))
+  (preproc_if
+    condition: (binary_expression
+      left: (identifier)
+      right: (number_literal))
+    (preproc_pragma
+      argument: (preproc_arg))
+    (preproc_extension
+      argument: (preproc_arg))
+    (preproc_line
+      argument: (preproc_arg))
+    (preproc_error
+      message: (preproc_arg))
+    (preproc_nothing)
+    (preproc_version)
+    alternative: (preproc_elif
+      condition: (binary_expression
+        left: (identifier)
+        right: (number_literal))
+      (preproc_version)
+      alternative: (preproc_else
+        (preproc_pragma
+          argument: (preproc_arg))
+        (preproc_extension
+          argument: (preproc_arg))
+        (preproc_line
+          argument: (preproc_arg))
+        (preproc_error
+          message: (preproc_arg))
+        (preproc_nothing)
+        (preproc_version))))
+  (preproc_ifdef
+    name: (identifier)
+    (function_definition
+      (function_prototype
+        (function_declarator
+          return_type: (type
+            (type_specifier))
+          name: (identifier)))
+      (compound_statement))
+    alternative: (preproc_else
+      (function_definition
+        (function_prototype
+          (function_declarator
+            return_type: (type
+              (type_specifier))
+            name: (identifier)))
+        (compound_statement))))
+  (preproc_if
+    condition: (preproc_defined
+      (identifier))
+    (preproc_function_def
+      name: (identifier)
+      parameters: (preproc_params
+        (identifier)
+        (identifier))
+      value: (preproc_arg))
+    (preproc_function_def
+      name: (identifier)
+      parameters: (preproc_params
+        (identifier)
+        (identifier)
+        (identifier))
+      value: (preproc_arg))
+    (preproc_ifdef
+      name: (identifier)
+      (function_definition
+        (function_prototype
+          (function_declarator
+            return_type: (type
+              (type_specifier))
+            name: (identifier)
+            parameters: (parameter_list
+              (parameter_declaration
+                type: (type_specifier)
+                name: (identifier)))))
+        (compound_statement
+          (statement_list
+            (return_statement
+              (function_call
+                function: (identifier)
+                arguments: (argument_list
+                  (identifier)
+                  (function_call
+                    function: (type_specifier)
+                    arguments: (argument_list
+                      (number_literal)))))))))
+      (preproc_function_def
+        name: (identifier)
+        parameters: (preproc_params
+          (identifier))
+        value: (preproc_arg)))
+    alternative: (preproc_elif
+      condition: (binary_expression
+        left: (identifier)
+        right: (number_literal))
+      (preproc_pragma
+        argument: (preproc_arg))
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_qualifier
+                (storage_qualifier))
+              (type_specifier))
+            name: (identifier)
+            value: (number_literal))))
+      alternative: (preproc_else
+        (preproc_function_def
+          name: (identifier)
+          parameters: (preproc_params
+            (identifier)
+            (identifier))
+          value: (preproc_arg))
+        (preproc_function_def
+          name: (identifier)
+          parameters: (preproc_params
+            (identifier)
+            (identifier)
+            (identifier))
+          value: (preproc_arg))
+        (declaration
+          (declarator_list
+            (declarator
+              (type
+                (type_qualifier
+                  (storage_qualifier))
+                (type_specifier))
+              name: (identifier)
+              value: (number_literal)))))))
+  (preproc_if
+    condition: (preproc_defined
+      (identifier))
+    (preproc_def
+      name: (identifier)
+      value: (preproc_arg))
+    (function_definition
+      (function_prototype
+        (function_declarator
+          return_type: (type
+            (type_specifier))
+          name: (identifier)))
+      (compound_statement))
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_specifier))
+          name: (identifier)
+          (array_specifier
+            (number_literal)))))
+    (preproc_if
+      condition: (preproc_defined
+        (identifier))
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_specifier))
+            name: (identifier)
+            value: (number_literal)))))
+    alternative: (preproc_elif
+      condition: (preproc_defined
+        (identifier))
+      (preproc_def
+        name: (identifier)
+        value: (preproc_arg))
+      (preproc_ifdef
+        name: (identifier)
+        (preproc_function_def
+          name: (identifier)
+          parameters: (preproc_params
+            (identifier))
+          value: (preproc_arg)))
+      (function_definition
+        (function_prototype
+          (function_declarator
+            return_type: (type
+              (type_specifier))
+            name: (identifier)))
+        (compound_statement))
+      alternative: (preproc_elif
+        condition: (preproc_defined
+          (identifier))
+        (preproc_function_def
+          name: (identifier)
+          parameters: (preproc_params
+            (identifier))
+          value: (preproc_arg))
+        (preproc_if
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal))
+          (declaration
+            (declarator_list
+              (declarator
+                (type
+                  (type_specifier))
+                name: (identifier)
+                value: (number_literal)))))
+        alternative: (preproc_else
+          (preproc_def
+            name: (identifier)
+            value: (preproc_arg))))))
+  (preproc_ifdef
+    name: (identifier)
+    (preproc_def
+      name: (identifier)
+      value: (preproc_arg))
+    (preproc_ifdef
+      name: (identifier)
+      (preproc_def
+        name: (identifier)
+        value: (preproc_arg))))
+  (preproc_if
+    condition: (binary_expression
+      left: (identifier)
+      right: (number_literal))
+    (declaration
+      (declarator_list
+        (declarator
+          (type
+            (type_qualifier
+              (storage_qualifier))
+            (type_specifier))
+          name: (identifier)
+          value: (number_literal))))
+    alternative: (preproc_else
+      (declaration
+        (declarator_list
+          (declarator
+            (type
+              (type_qualifier
+                (storage_qualifier))
+              (type_specifier))
+            name: (identifier)
+            value: (number_literal))))))
+  (function_definition
+    (function_prototype
+      (function_declarator
+        return_type: (type
+          (type_specifier))
+        name: (identifier)))
+    (compound_statement
+      (statement_list
+        (preproc_ifdef
+          name: (identifier)
+          (local_declaration
+            (declarator_list
+              (declarator
+                (type
+                  (type_specifier))
+                name: (identifier)
+                value: (number_literal))))
+          alternative: (preproc_else
+            (local_declaration
+              (declarator_list
+                (declarator
+                  (type
+                    (type_specifier))
+                  name: (identifier)
+                  value: (number_literal))))))))))

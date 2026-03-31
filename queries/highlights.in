@@ -1,0 +1,112 @@
+"break" @keyword
+"case" @keyword
+"const" @keyword
+"continue" @keyword
+"default" @keyword
+"discard" @keyword
+"do" @keyword
+"else" @keyword
+"for" @keyword
+"if" @keyword
+"return" @keyword
+"struct" @keyword
+"switch" @keyword
+"while" @keyword
+
+(preproc_call
+  directive: (preproc_directive) @keyword)
+
+"=" @operator
+(assignment_expression
+  operator: _ @operator)
+
+(binary_expression
+  operator: _ @operator)
+
+(unary_expression
+  operator: _ @operator)
+
+(update_expression
+  operator: _ @operator)
+
+
+"." @delimiter
+"," @delimiter
+";" @delimiter
+"(" @delimiter
+")" @delimiter
+"[" @delimiter
+"]" @delimiter
+"{" @delimiter
+"}" @delimiter
+
+[
+  (number_literal)
+] @number
+
+(bool_literal) @boolean
+
+(comment) @comment
+
+(invariant_qualifier) @keyword
+(layout_qualifier) @keyword
+(precise_qualifier) @keyword
+
+((storage_qualifier) @keyword
+ (#match? @keyword "^subroutine(\\(|$)"))
+
+(function_declarator
+  name: (identifier) @function)
+
+(function_call
+  function: (identifier) @function)
+
+(function_call
+  function: (field_expression
+    field: (field_identifier) @function))
+
+(preproc_function_def
+  name: (identifier) @function.special)
+
+(field_identifier) @property
+
+(type_specifier
+  (type_identifier) @type)
+
+{{GENERATED_TYPE_BUILTIN_KEYWORDS}}
+
+{{GENERATED_TYPE_QUALIFIER_KEYWORDS}}
+
+(layout_argument
+  "shared" @attribute)
+
+{{GENERATED_ATTRIBUTE_KEYWORDS}}
+
+((identifier) @constant
+ (#match? @constant "^[A-Z][A-Z\\d_]*$"))
+
+; Built-in constant names from builtins.adoc.
+((identifier) @constant.builtin
+{{GENERATED_BUILTIN_CONSTANT_PREDICATE}})
+
+; Built-in variable names from builtins.adoc.
+((identifier) @variable.builtin
+{{GENERATED_BUILTIN_VARIABLE_PREDICATE}})
+
+; Built-in type-like names from builtins.adoc such as gl_PerVertex.
+((type_specifier
+   (type_identifier) @type.builtin)
+{{GENERATED_BUILTIN_TYPE_NAME_PREDICATE}})
+
+; Built-in function names from builtinfunctions.adoc.
+; Vulkan-only built-in function names from builtinfunctions.adoc.
+((function_call
+   function: (identifier) @function.builtin.vk)
+{{GENERATED_POSTFIX_VK_FUNCTION_PREDICATE}})
+
+; Built-in function names from builtinfunctions.adoc.
+((function_call
+   function: (identifier) @function.builtin)
+{{GENERATED_POSTFIX_FUNCTION_PREDICATE}})
+
+(identifier) @variable
