@@ -314,19 +314,17 @@ void main() {
   (preproc_ifdef
     name: (identifier)
     (function_definition
-      (function_prototype
-        (function_declarator
-          return_type: (type
-            (type_specifier))
-          name: (identifier)))
+      (function_declarator
+        return_type: (type
+          (type_specifier))
+        name: (identifier))
       (compound_statement))
     alternative: (preproc_else
       (function_definition
-        (function_prototype
-          (function_declarator
-            return_type: (type
-              (type_specifier))
-            name: (identifier)))
+        (function_declarator
+          return_type: (type
+            (type_specifier))
+          name: (identifier))
         (compound_statement))))
   (preproc_if
     condition: (preproc_defined
@@ -347,15 +345,14 @@ void main() {
     (preproc_ifdef
       name: (identifier)
       (function_definition
-        (function_prototype
-          (function_declarator
-            return_type: (type
-              (type_specifier))
-            name: (identifier)
-            parameters: (parameter_list
-              (parameter_declaration
-                type: (type_specifier)
-                name: (identifier)))))
+        (function_declarator
+          return_type: (type
+            (type_specifier))
+          name: (identifier)
+          parameters: (parameter_list
+            (parameter_declaration
+              type: (type_specifier)
+              name: (identifier))))
         (compound_statement
           (statement_list
             (return_statement
@@ -417,11 +414,10 @@ void main() {
       name: (identifier)
       value: (preproc_arg))
     (function_definition
-      (function_prototype
-        (function_declarator
-          return_type: (type
-            (type_specifier))
-          name: (identifier)))
+      (function_declarator
+        return_type: (type
+          (type_specifier))
+        name: (identifier))
       (compound_statement))
     (declaration
       (declarator_list
@@ -455,11 +451,10 @@ void main() {
             (identifier))
           value: (preproc_arg)))
       (function_definition
-        (function_prototype
-          (function_declarator
-            return_type: (type
-              (type_specifier))
-            name: (identifier)))
+        (function_declarator
+          return_type: (type
+            (type_specifier))
+          name: (identifier))
         (compound_statement))
       alternative: (preproc_elif
         condition: (preproc_defined
@@ -518,11 +513,10 @@ void main() {
             name: (identifier)
             value: (number_literal))))))
   (function_definition
-    (function_prototype
-      (function_declarator
-        return_type: (type
-          (type_specifier))
-        name: (identifier)))
+    (function_declarator
+      return_type: (type
+        (type_specifier))
+      name: (identifier))
     (compound_statement
       (statement_list
         (preproc_ifdef

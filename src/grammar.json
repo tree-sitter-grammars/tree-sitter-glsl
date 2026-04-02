@@ -32,7 +32,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "function_prototype"
+          "name": "function_declarator"
         },
         {
           "type": "SYMBOL",
@@ -3035,7 +3035,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "function_prototype"
+              "name": "function_declarator"
             },
             {
               "type": "STRING",
@@ -3200,19 +3200,6 @@
         }
       ]
     },
-    "function_prototype": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "function_declarator"
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        }
-      ]
-    },
     "function_declarator": {
       "type": "SEQ",
       "members": [
@@ -3251,6 +3238,10 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },

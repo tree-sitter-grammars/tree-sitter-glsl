@@ -52,11 +52,10 @@ void main() {
 
 (translation_unit
   (function_definition
-    (function_prototype
-      (function_declarator
-        return_type: (type
-          (type_specifier))
-        name: (identifier)))
+    (function_declarator
+      return_type: (type
+        (type_specifier))
+      name: (identifier))
     (compound_statement
       (statement_list
         (local_declaration

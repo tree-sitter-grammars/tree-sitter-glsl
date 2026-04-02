@@ -444,7 +444,7 @@ export default grammar({
        * @returns {RuleOrLiteral} Rule definition.
        */
       function_definition: ($) =>
-        seq($.function_prototype, $.compound_statement),
+        seq($.function_declarator, $.compound_statement),
 
       // ── Expressions ── grammar.adoc ────────────────────────────────────
 
@@ -1559,7 +1559,7 @@ export default grammar({
        */
       declaration: ($) =>
         choice(
-          seq($.function_prototype, ';'),
+          seq($.function_declarator, ';'),
           seq($.declarator_list, ';'),
           seq('precision', $.precision_qualifier, $.type_specifier, ';'),
           // Interface blocks
@@ -1596,15 +1596,7 @@ export default grammar({
       /**
        * ```bnf
        * function_prototype : function_declarator RIGHT_PAREN
-       * ```
        *
-       * @param {GrammarSymbols<string>} $ Grammar symbols.
-       * @returns {RuleOrLiteral} Rule definition.
-       */
-      function_prototype: ($) => seq($.function_declarator, ')'),
-
-      /**
-       * ```bnf
        * function_declarator :
        *     function_header
        *     function_header_with_parameters
@@ -1617,10 +1609,11 @@ export default grammar({
        *     fully_specified_type IDENTIFIER LEFT_PAREN
        * ```
        *
-       * Tree-sitter compromise: function_header and
-       * function_header_with_parameters are collapsed into
-       * function_declarator. The left-recursive parameter chain
-       * is replaced by optional(parameter_list).
+       * Tree-sitter compromise: function_prototype is inlined and its
+       * sub-production (closing RIGHT_PAREN) collapsed here. The spec splits
+       * LEFT_PAREN and RIGHT_PAREN across function_header and
+       * function_prototype. They're merged here so the delimiter pair lives in
+       * one node.
        *
        * @param {GrammarSymbols<string>} $ Grammar symbols.
        * @returns {RuleOrLiteral} Rule definition.
@@ -1631,6 +1624,7 @@ export default grammar({
           field('name', $.identifier),
           '(',
           optional(field('parameters', $.parameter_list)),
+          ')',
         ),
 
       /**

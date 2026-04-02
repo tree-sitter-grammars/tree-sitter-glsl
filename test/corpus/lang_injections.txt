@@ -203,11 +203,10 @@ extern "C" { void inner_cpp(); }
     (preproc_nothing)
     (preproc_version)
     (function_definition
-      (function_prototype
-        (function_declarator
-          (type
-            (type_specifier))
-          (identifier)))
+      (function_declarator
+        (type
+          (type_specifier))
+        (identifier))
       (compound_statement))
     (declaration
       (declarator_list
@@ -266,11 +265,10 @@ extern "C" { void inner_cpp(); }
     (preproc_nothing)
     (preproc_version)
     (function_definition
-      (function_prototype
-        (function_declarator
-          (type
-            (type_specifier))
-          (identifier)))
+      (function_declarator
+        (type
+          (type_specifier))
+        (identifier))
       (compound_statement))
     (declaration
       (declarator_list

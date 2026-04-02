@@ -1100,7 +1100,7 @@
           "named": true
         },
         {
-          "type": "function_prototype",
+          "type": "function_declarator",
           "named": true
         },
         {
@@ -1836,21 +1836,6 @@
           "type": "compound_statement",
           "named": true
         },
-        {
-          "type": "function_prototype",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "function_prototype",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
         {
           "type": "function_declarator",
           "named": true

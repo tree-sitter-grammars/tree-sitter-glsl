@@ -159,29 +159,27 @@ void process(const in float values[4]) {
     (array_specifier
       (number_literal)))
   (declaration
-    (function_prototype
-      (function_declarator
-        return_type: (type
-          (type_specifier))
-        name: (identifier)
-        parameters: (parameter_list
-          (parameter_declaration
-            type: (type_specifier)
-            name: (identifier))
-          (parameter_declaration
-            type: (type_specifier)
-            name: (identifier))))))
+    (function_declarator
+      return_type: (type
+        (type_specifier))
+      name: (identifier)
+      parameters: (parameter_list
+        (parameter_declaration
+          type: (type_specifier)
+          name: (identifier))
+        (parameter_declaration
+          type: (type_specifier)
+          name: (identifier)))))
   (declaration
-    (function_prototype
-      (function_declarator
-        return_type: (type
-          (type_qualifier
-            (storage_qualifier
-              (type_name_list
-                (identifier)
-                (identifier))))
-          (type_specifier))
-        name: (identifier))))
+    (function_declarator
+      return_type: (type
+        (type_qualifier
+          (storage_qualifier
+            (type_name_list
+              (identifier)
+              (identifier))))
+        (type_specifier))
+      name: (identifier)))
   (declaration
     (type_qualifier
       (storage_qualifier))
@@ -369,20 +367,19 @@ void process(const in float values[4]) {
           (type_specifier))
         name: (identifier))))
   (function_definition
-    (function_prototype
-      (function_declarator
-        return_type: (type
-          (type_specifier))
-        name: (identifier)
-        parameters: (parameter_list
-          (parameter_declaration
-            (type_qualifier
-              (storage_qualifier)
-              (storage_qualifier))
-            type: (type_specifier)
-            name: (identifier)
-            (array_specifier
-              (number_literal))))))
+    (function_declarator
+      return_type: (type
+        (type_specifier))
+      name: (identifier)
+      parameters: (parameter_list
+        (parameter_declaration
+          (type_qualifier
+            (storage_qualifier)
+            (storage_qualifier))
+          type: (type_specifier)
+          name: (identifier)
+          (array_specifier
+            (number_literal)))))
     (compound_statement
       (statement_list
         (local_declaration
