@@ -1,0 +1,154 @@
+// GLSL grammar for tree-sitter (native DSL).
+// Extends tree-sitter-c.
+
+let c = inherit("../tree-sitter-c/grammar.tsg")
+
+// Shared qualifier sets that appear in declaration / field_declaration / parameter_declaration.
+macro _glsl_storage_quals() rule_t {
+    choice(
+        "in", "out", "inout", "uniform", "shared", "attribute", "varying",
+        "buffer", "coherent", "readonly", "writeonly",
+        "precision", "highp", "mediump", "lowp", "subroutine",
+        "centroid", "sample", "patch", "smooth", "flat", "noperspective",
+        "invariant", "precise",
+        extension_storage_class, layout_specification,
+    )
+}
+macro _glsl_field_quals() rule_t {
+    choice(
+        "in", "out", "inout", "uniform", "shared", "attribute", "varying",
+        "buffer", "coherent", "readonly", "writeonly",
+        "precision", "highp", "mediump", "lowp", "subroutine",
+        "centroid", "sample", "patch", "smooth", "flat", "noperspective",
+        "invariant", "precise",
+        extension_storage_class, layout_specification,
+    )
+}
+macro _glsl_param_quals() rule_t {
+    choice(
+        "in", "out", "inout", "uniform", "shared", "attribute", "varying",
+        "buffer", "coherent", "readonly", "writeonly",
+        "centroid", "sample", "patch", "smooth", "flat", "noperspective",
+        "precise",
+        layout_specification,
+    )
+}
+
+grammar {
+    language: "glsl",
+    inherits: c,
+
+    // C conflicts inlined, then GLSL-specific entries appended.
+    conflicts: [
+        // C
+        [type_specifier, _declarator],
+        [type_specifier, _declarator, macro_type_specifier],
+        [type_specifier, expression],
+        [type_specifier, expression, macro_type_specifier],
+        [type_specifier, macro_type_specifier],
+        [type_specifier, sized_type_specifier],
+        [sized_type_specifier],
+        [attributed_statement],
+        [_declaration_modifiers, attributed_statement],
+        [enum_specifier],
+        [type_specifier, _old_style_parameter_list],
+        [parameter_list, _old_style_parameter_list],
+        [function_declarator, _function_declaration_declarator],
+        [_block_item, statement],
+        [_top_level_item, _top_level_statement],
+        [type_specifier, _top_level_expression_statement],
+        [type_qualifier, extension_expression],
+        // GLSL
+        [function_definition, declaration],
+        [declaration],
+    ],
+}
+
+// C's _top_level_item minus alias(_old_style_function_definition, function_definition), plus preproc_extension.
+override rule _top_level_item {
+    choice(
+        function_definition,
+        linkage_specification, declaration, _top_level_statement,
+        attributed_statement, type_definition, _empty_declaration,
+        preproc_if, preproc_ifdef, preproc_include,
+        preproc_def, preproc_function_def, preproc_call,
+        preproc_extension,
+    )
+}
+
+// C's _block_item minus alias(_old_style_function_definition, function_definition), plus preproc_extension.
+override rule _block_item {
+    choice(
+        function_definition,
+        linkage_specification, declaration, statement,
+        attributed_statement, type_definition, _empty_declaration,
+        preproc_if, preproc_ifdef, preproc_include,
+        preproc_def, preproc_function_def, preproc_call,
+        preproc_extension,
+    )
+}
+
+override rule function_definition {
+    seq(
+        optional(seq(
+            "subroutine",
+            optional(seq(
+                "(",
+                optional(identifier),
+                repeat(seq(",", identifier)),
+                ")",
+            )),
+        )),
+        c::function_definition,
+    )
+}
+
+rule preproc_extension {
+    seq(
+        field(directive, preproc_directive),
+        field(extension, identifier),
+        token_immediate(regexp(r"[ \t]*:[ \t]*")),
+        field(behavior, extension_behavior),
+        token_immediate(regexp(r"\r?\n")),
+    )
+}
+
+rule extension_behavior { choice("require", "enable", "warn", "disable") }
+
+override rule declaration {
+    choice(
+        seq(choice("invariant", "precise"), identifier, ";"),
+        seq(
+            repeat(_glsl_storage_quals()),
+            choice(
+                seq(identifier, field_declaration_list, optional(choice(identifier, array_declarator)), ";"),
+                c::declaration,
+            ),
+        ),
+    )
+}
+
+override rule field_declaration {
+    seq(repeat(_glsl_field_quals()), c::field_declaration)
+}
+
+override rule parameter_declaration {
+    seq(repeat(_glsl_param_quals()), c::parameter_declaration)
+}
+
+rule extension_storage_class {
+    choice(
+        "rayPayloadEXT", "rayPayloadInEXT", "hitAttributeEXT",
+        "callableDataEXT", "callableDataInEXT", "shaderRecordEXT",
+        "rayPayloadNV", "rayPayloadInNV", "hitAttributeNV",
+        "callableDataNV", "callableDataInNV", "shaderRecordNV",
+    )
+}
+
+rule layout_specification { seq("layout", layout_qualifiers) }
+rule layout_qualifiers {
+    seq("(", qualifier, repeat(seq(",", qualifier)), ")")
+}
+rule qualifier {
+    choice("shared", identifier, seq(identifier, "=", expression))
+}
